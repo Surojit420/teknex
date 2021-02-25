@@ -22,6 +22,7 @@
                                 <li><a href="<?=base_url()?>admin/logo">Logo</a></li>
                                 <li><a href="<?=base_url()?>admin/banner">Banner</a></li>
                                 <li><a href="<?=base_url()?>admin/footercontact">Footer & contact</a></li>
+                                <li><a href="<?=base_url()?>admin/client">Clients</a></li>
                             </ul>
                         </li> 
                         <li>

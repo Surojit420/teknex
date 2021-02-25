@@ -1,18 +1,15 @@
- <?php
-                                    foreach ($logo_data as $key => $value) {
-                   
-                                    ?>
-                                       <tr>
+        <?php foreach ($banner_data as $key => $value) { ?>
+                                            <tr>
                                         <td><?=$key+1?></td>
+                                        <td><?=$value->title_name?></td>
+                                        <td><div class="all_seller_table_width">
+                                            <?=$value->description?>
+                                          </div></td>
                                         <td>
-                                            <img class="tbli" src="<?=base_url('webroot/admin/images/logo/'.$value->image.'')?>" style="height: 101px;width: 101px;">
+                                            <img src="<?=base_url()?>webroot/admin/images/banner/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>
                                         <td>
-                                           <?=$value->name?>
-                                        </td>
-
-                                        <td>
-                                            <input type="checkbox" class="js-switch" onchange="common_status_change('<?=$value->uniqcode?>','/status')" id="status" value="<?=$value->uniqcode?>"  <?=$value->status == 'Active' ? 'checked' : ''?>/></td>
+                                            <input type="checkbox" class="js-switch" onchange="common_status_change(this.value,'/status')" id="status" value="<?=$value->uniqcode?>" <?=$value->status == 'Active' ? 'checked' : ''?> /></td>
                                         <td>
                                             <div class="d-flex">
                                                 <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>',/edit)" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
@@ -21,8 +18,8 @@
                                             </div>
                                         </td>    
                                     </tr>
-                                <?php } ?>
-                                <script>
+                                    <?php  } ?>
+                                     <script>
                                     $(document).ready(function() 
 {            
     var elems = document.querySelectorAll('.js-switch');                

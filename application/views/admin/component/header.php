@@ -39,7 +39,7 @@ css -->
 validationEngine css -->
  <!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/style.scss"/> --> <!-- For custom scss -->
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/style.css"/> 
-<!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/awesome-bootstrap-checkbox.css"/>  -->
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/awesome-bootstrap-checkbox.css"/> 
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/switchery.css"/>  
 
 </head> 

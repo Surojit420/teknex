@@ -19,7 +19,7 @@ class LogoController extends CI_Controller
 	public function index()
 	{
 		$this->data['page_title'] = 'TekNex | Logo';
-		$this->data['logo_data'] = $this->CommonModel->RetriveRecordByWhere('tbl_logo',['status<>' => 'Delete']);
+		$this->data['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
 		$this->data['subview'] = 'setting/logo/logo';
 		$this->load->view('admin/layout/default', $this->data);
 	}
@@ -66,7 +66,11 @@ class LogoController extends CI_Controller
 	             	}
         		}
 
-        		
+        		$data=array(
+			'status' => 'Inactive',
+			'update_date' => date('Y-m-d H:i:s'),
+       			);
+       			$this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'image'=>$logo_upload_image,
@@ -74,6 +78,7 @@ class LogoController extends CI_Controller
 				'status' => "Active",
 				'create_date' => date('Y-m-d H:i:s'),
 				);
+
 				$insertid = $this->CommonModel->insert($data,"tbl_logo");
 				// echo $insertid;
 				if($insertid)
@@ -127,45 +132,10 @@ class LogoController extends CI_Controller
 	}
 	public function edit_data()
 	{
-
 		$uniqcode=$this->input->post('uniqcode');
 		$name=$this->input->post('name');
 		$logo_row = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		// $this->db->where('status <>', 'Delete');
-		// $this->db->where('uniqcode', $uniqcode);
-		// $logo_row=$this->db->get('tbl_logo')->row();
-
-			 //   echo '<div class="col-sm-12 b-r"> 
-    //             <h2>Logo</h2><br>                   
-    //                 <form role="form" id="logo_data" action="'.base_url('admin/logo/update').'" method="post" enctype="multipart/form-data">
-    //                 <input type="hidden" name="uniqcode" value="'.$logo_row->uniqcode.'">
-    //                     <div class="row">
-    //                     <div class="col-lg-12 text-center">
-    //                                          <div class="form-group">
-    //                     						<img src="'.base_url('webroot/admin/images/logo/'.$logo_row->image.'').'" id="upload_logo" onclick="get_upload_logo()" class="add_img_button">
-    //                                                     <input type="file" class="image-upload select_image" name="image" class="validate[required]" id="logo_input_upload" style="display: none" accept=".jpg,.jpeg,.png" onchange="logo_show_photo(this)">
-    //                                             </div>
-    //                                             </div>
-    //                         <div class="col-lg-6">
-	   //                          <div class="form-group">
-    //             					<label>Logo Name</label>
-	   //                              	<input type="text" name="name" id="name" class="form-control only_character validate[required]" data-errormessage-value-missing="Logo name is required" data-prompt-position="bottomLeft" placeholder="Enter logo name" maxlength="200" value="'.$logo_row->name.'">      
-    //     						</div> 
-    //                         </div>     
-    //                     </div>
-    //                     <div class="col-sm-12">                    
-    //                         <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>                                                            
-    //                         <button class="btn btn-primary pull-right m-t-n-xs grediant-btn"  type="submit" style="margin-right: 6px;" id="change_password"><strong>Save</strong></button>
-    //                     </div>
-                        
-    //                 </form>
-    //             </div>
-    //             <script>
-				// $(function () {
-				// $("#logo_data").validationEngine();
-				// });
-				// </script>';
-		echo '<div class="col-lg-12">
+				echo '<div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Logo</h4>
@@ -202,9 +172,10 @@ class LogoController extends CI_Controller
                     </script>';
 
 	}
-	public function status(){		
+	public function status()
+	{		
         $uniqcode=$this->input->post('uniqcode'); 
-        echo $uniqcode;    
+       //echo $uniqcode;    
        //$this->CommonModel->GetRecordSql("selet * from tbl_logo ") 
        $data=array(
 			'status' => 'Inactive',
@@ -212,13 +183,15 @@ class LogoController extends CI_Controller
        );
        $this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
         $data=array(
-			'status' => 'active',
+			'status' => 'Active',
 			'update_date' => date('Y-m-d H:i:s'),
        ); 
        	 $check =$this->CommonModel->UpdateRecord($data,'tbl_logo','uniqcode',$uniqcode); 
        	 if($check == 1)
 	  	{
-		 $this->session->set_flashdata('success', 'Status update successfully');                     
+		 $this->session->set_flashdata('success', 'Status update successfully'); 
+		 $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
+	  $this->load->view('admin/setting/logo/edit', $this->logo);                    
 		//echo $check;
 	  	}
 	  	else
@@ -226,45 +199,38 @@ class LogoController extends CI_Controller
 	  	$this->session->set_flashdata('error', 'Status not update');                     
 		//echo $check;
 	  	}
-	  $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhere('tbl_logo',['status<>' => 'Delete']);
-	  $this->load->view('admin/setting/logo/edit', $this->logo);
-  //       $this->db->where('status <>', 'Delete');
-  //       $this->db->where('uniqcode', $uniqcode);
-  //       $get_data=$this->db->get('tbl_logo')->row();
-
-        
-  //       if($get_data->status=='Active'){
-  //           $data=array(
-  //               'status'=>'Inactive',
-  //               'datetime'=>date('Y-m-d H:i:s'),
-  //           );
-  //       }elseif($get_data->status=='Inactive'){
-  //           $data=array(
-  //               'status'=>'Active',
-  //               'datetime'=>date('Y-m-d H:i:s'),
-  //           );
-  //       }
-		// $this->db->where('uniqcode', $uniqcode);        
-  //       $this->db->update('tbl_logo', $data);      
+	     
 	}
-	public function destroy($uniqcode)
+	public function destroy()
 	{
-      	$data=array(
-        'status'=>'Delete',
-        'update_date'=>date('Y-m-d H:i:s'),
-    	);
-	  	$check=$this->CommonModel->UpdateRecord($data,'tbl_logo','uniqcode',$uniqcode);
-	  	//echo $check;
-	  	if($check == 1)
-	  	{
-		 $this->session->set_flashdata('success', 'Logo deleted successfully');                     
-		 redirect('admin/logo');
-	  	}
-	  	else
-	  	{
-	  	$this->session->set_flashdata('error', 'Logo not deleted successfully');                     
-		 redirect('admin/logo');
-	  	}
+		$uniqcode = $this->input->post('uniqcode');
+		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
+		 // if($destroy_date->status == 'Active')
+		 // {
+
+		 // }
+		 // else
+		 //{
+	      	$data=array(
+	        'status'=>'Delete',
+	        'update_date'=>date('Y-m-d H:i:s'),
+	    	);
+		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_logo','uniqcode',$uniqcode);
+		  	//echo $check;
+		  	if($check == 1)
+		  	{
+			 $this->session->set_flashdata('success', 'Logo deleted successfully');
+			  $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
+		  	$this->load->view('admin/setting/logo/edit', $this->logo);                     
+			// redirect('admin/logo');
+		  	}
+		  	else
+		  	{
+		  	$this->session->set_flashdata('error', 'Logo not deleted successfully');                     
+			 //redirect('admin/logo');
+		  	}
+		  // }
+
 	}
 
 

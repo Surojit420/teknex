@@ -13,13 +13,25 @@ $route['logout'] = 'admin/AdminController/logout';
 /*-----------------------LOGO----------------*/
 $route['admin/logo'] = 'admin/setting/LogoController';
 $route['admin/logo_add'] = 'admin/setting/LogoController/add_logo';
-$route['admin/destroy/([a-zA-Z0-9]+)'] = 'admin/setting/LogoController/destroy/$1';
+$route['admin/logo/destroy'] = 'admin/setting/LogoController/destroy';
 $route['admin/logo/status'] = 'admin/setting/LogoController/status';
 $route['admin/logo/edit_data'] = 'admin/setting/LogoController/edit_data';
 
+/*-----------------------Banner------------*/
+$route['admin/banner'] = 'admin/setting/BannerController';
+$route['admin/add_banner'] =  'admin/setting/BannerController/banner_add';
+$route['admin/banner/destroy'] =  'admin/setting/BannerController/destroy';
+$route['admin/banner/status'] =  'admin/setting/BannerController/status';
+$route['admin/banner/edit'] = 'admin/setting/BannerController/';
+
+/*-----------------------Clients------------*/
+$route['admin/client'] = 'admin/setting/ClientsController';
+$route['admin/client_add'] = 'admin/setting/ClientsController/client_add';
+$route['admin/client/destroy'] = 'admin/setting/ClientsController/destroy';
+$route['admin/client/status'] = 'admin/setting/ClientsController/status';
 
 $route['admin/footercontact'] = 'admin/setting/FooterContactController';
-$route['admin/banner'] = 'admin/setting/BannerController';
+
 $route['admin/business'] = 'admin/business/BusinessController';
 $route['admin/query'] = 'admin/query/QueryController';
 $route['admin/edit'] = 'admin/query/QueryController';

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BannerController extends CI_Controller 
+class ClientsController extends CI_Controller 
 {
 	function __construct() 
 	 {
@@ -17,16 +17,18 @@ class BannerController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Banner';
-		$this->data['subview']='setting/banner/banner';
-		$this->data['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['page_title']='TekNex | Clients';
+		$this->data['subview']='setting/clients/clients';
+		$this->data['client_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_clients',['status<>' => 'Delete'],'id' ,'desc');
 		$this->load->view('admin/layout/default', $this->data);
 	}
-	public function banner_add()
+	public function client_add()
 	{
-			$title_name = $this->input->post('banner_name');
+			$title_name = $this->input->post('client_name');
+			$link = $this->input->post('client_link');
 			$description = $this->input->post('description');
-			$count = $this->CommonModel->CountWhere('tbl_banner',['title_name' => $title_name]);
+
+			$count = $this->CommonModel->CountWhere('tbl_clients',['title' => $title_name]);
 			if($count == 0) 
 			{
         	$logo_upload_image='';
@@ -46,7 +48,7 @@ class BannerController extends CI_Controller
 	                    $config['source_image'] = $image_data['full_path']; 
 	                    $config['create_thumb'] = TRUE;
 	 					$config['maintain_ratio'] = TRUE;
-	 					$config['new_image']    = FCPATH.'/webroot/admin/images/banner/'.$image_data['file_name'];
+	 					$config['new_image']    = FCPATH.'/webroot/admin/images/clients/'.$image_data['file_name'];
 	                    $config['width'] = 655;
 	                    $config['height'] = 468;
 	                    $this->load->library('image_lib', $config);
@@ -65,26 +67,28 @@ class BannerController extends CI_Controller
 	             	}
         		}
 
-        		$data=array(
-			'status' => 'Inactive',
-			'update_date' => date('Y-m-d H:i:s'),
-       			);
-       			$this->CommonModel->UpdateRecord($data,'tbl_banner','status','Active'); 
+   //      		$data=array(
+			// 'status' => 'Inactive',
+			// 'update_date' => date('Y-m-d H:i:s'),
+   //     			);
+   //     			$this->CommonModel->UpdateRecord($data,'tbl_clients','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
-				'title_name' => $title_name,
+				'title' => $title_name,
+				'description' => $description,
 				'image' => $logo_upload_image,
+				'link' => $link,
 				'description' => $description,
 				'status' => "Active",
 				'create_date' => date('Y-m-d H:i:s'),
 				);
 
-				$insertid = $this->CommonModel->insert($data,"tbl_banner");
+				$insertid = $this->CommonModel->insert($data,"tbl_clients");
 				// echo $insertid;
 				if($insertid)
 				{
-					$this->session->set_flashdata('success', 'Logo added successfully.');
-					redirect('admin/banner');
+					$this->session->set_flashdata('success', 'client added successfully.');
+					redirect('admin/client');
 				}
 				else
 				{
@@ -93,8 +97,8 @@ class BannerController extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_flashdata('error', 'banner Name already exists!');
-				redirect('admin/banner');
+				$this->session->set_flashdata('error', 'client Name already exists!');
+				redirect('admin/client');
 				
 			}
 
@@ -113,59 +117,22 @@ class BannerController extends CI_Controller
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
-		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_banner','uniqcode',$uniqcode);
+		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_clients','uniqcode',$uniqcode);
 		  	//echo $check;
 		  	if($check == 1)
 		  	{
-			 $this->session->set_flashdata('success', 'Banner deleted successfully');
-			  $this->banner['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
-		  	$this->load->view('admin/setting/banner/edit', $this->banner);                     
-			// redirect('admin/logo');
+			 $this->session->set_flashdata('success', 'Client deleted successfully');
+			  $this->client['client_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_clients',['status<>' => 'Delete'],'id' ,'desc');
+		  	$this->load->view('admin/setting/client/edit', $this->client);                     
+			 redirect('admin/client');
 		  	}
 		  	else
 		  	{
-		  	$this->session->set_flashdata('error', 'Banner not deleted successfully');                     
-			 //redirect('admin/logo');
+		  	$this->session->set_flashdata('error', 'client not deleted successfully');                     
+			 redirect('admin/client');
 		  	}
 		  // }
 
 	}
-	public function status()
-	{		
-        $uniqcode=$this->input->post('uniqcode'); 
-       //echo $uniqcode;    
-       $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_banner',['uniqcode' => $uniqcode]);
-       if($destroy_date->status == 'Active')
-       {
-	        $data=array(
-				'status' => 'Inactive',
-				'update_date' => date('Y-m-d H:i:s'),
-	       );
-       		$check= $this->CommonModel->UpdateRecord($data,'tbl_banner','uniqcode',$uniqcode); 
-       }
-       else
-       {
-	       	$data=array(
-				'status' => 'Active',
-				'update_date' => date('Y-m-d H:i:s'),
-	       ); 
-	       	 $check =$this->CommonModel->UpdateRecord($data,'tbl_banner','uniqcode',$uniqcode); 
-		}
-		 if($check == 1)
-		  	{
-			 $this->session->set_flashdata('success', 'Status update successfully'); 
-			 $this->banner['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
-		  $this->load->view('admin/setting/banner/edit', $this->banner);                    
-			//echo $check;
-		  	}
-		  	else
-		  	{
-		  	$this->session->set_flashdata('error', 'Status not update');                     
-			//echo $check;
-		  	}
-		     
-	}
-	
-
-
 }
+?>
