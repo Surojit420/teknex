@@ -13,24 +13,64 @@ $route['logout'] = 'admin/AdminController/logout';
 /*-----------------------LOGO----------------*/
 $route['admin/logo'] = 'admin/setting/LogoController';
 $route['admin/logo_add'] = 'admin/setting/LogoController/add_logo';
-$route['admin/logo/destroy'] = 'admin/setting/LogoController/destroy';
+$route['admin/logo/destroy/([a-zA-Z0-9]+)'] = 'admin/setting/LogoController/destroy/$1';
 $route['admin/logo/status'] = 'admin/setting/LogoController/status';
 $route['admin/logo/edit_data'] = 'admin/setting/LogoController/edit_data';
 
 /*-----------------------Banner------------*/
 $route['admin/banner'] = 'admin/setting/BannerController';
-$route['admin/add_banner'] =  'admin/setting/BannerController/banner_add';
+$route['admin/banner_add'] =  'admin/setting/BannerController/banner_add';
 $route['admin/banner/destroy'] =  'admin/setting/BannerController/destroy';
 $route['admin/banner/status'] =  'admin/setting/BannerController/status';
-$route['admin/banner/edit'] = 'admin/setting/BannerController/';
+$route['admin/banner/edit'] = 'admin/setting/BannerController/edit_data';
+$route['admin/banner/banner_update'] = 'admin/setting/BannerController/update_data';
+
 
 /*-----------------------Clients------------*/
-$route['admin/client'] = 'admin/setting/ClientsController';
-$route['admin/client_add'] = 'admin/setting/ClientsController/client_add';
-$route['admin/client/destroy'] = 'admin/setting/ClientsController/destroy';
-$route['admin/client/status'] = 'admin/setting/ClientsController/status';
+$route['admin/client'] = 'admin/client/ClientController';
+$route['admin/client_add'] = 'admin/client/ClientController/client_add';
+$route['admin/client/destroy'] = 'admin/client/ClientController/destroy';
+$route['admin/client/status'] = 'admin/client/ClientController/status';
+$route['admin/client/edit'] = 'admin/client/ClientController/edit_data';
+$route['admin/client/client_update'] = 'admin/client/ClientController/update_data';
 
+
+
+
+/*-----------------------Blogs------------*/
+$route['admin/blogs'] = 'admin/blogs/BlogsController';
+$route['admin/blogs_add'] = 'admin/blogs/BlogsController/blogs_add';
+$route['admin/blogs/destroy'] = 'admin/blogs/BlogsController/destroy';
+$route['admin/blogs/status'] = 'admin/blogs/BlogsController/status';
+$route['admin/blogs/edit'] = 'admin/blogs/BlogsController/edit';
+
+
+/*-----------------------Service------------*/ 
+$route['admin/service'] = 'admin/setting/ServiceController';
+$route['admin/service_add'] =  'admin/setting/ServiceController/service_add';
+$route['admin/service/destroy'] =  'admin/setting/ServiceController/destroy';
+$route['admin/service/status'] =  'admin/setting/ServiceController/status';
+$route['admin/service/edit'] = 'admin/setting/ServiceController/edit_data';
+$route['admin/service/service_update'] = 'admin/setting/ServiceController/update_data';
+
+/*-----------------------About Us------------*/ 
+$route['admin/aboutus'] = 'admin/setting/AboutusController';
+$route['admin/aboutus_add'] =  'admin/setting/AboutusController/aboutus_add'; 
+$route['admin/aboutus/destroy'] =  'admin/setting/AboutusController/destroy';
+$route['admin/aboutus/edit'] = 'admin/setting/AboutusController/edit_data';
+$route['admin/aboutus/aboutus_update'] = 'admin/setting/AboutusController/update_data';
+
+
+
+/*-----------------------Footer & Contact------------*/ 
 $route['admin/footercontact'] = 'admin/setting/FooterContactController';
+$route['admin/footercontact_add'] =  'admin/setting/FooterContactController/footcontact_add';
+$route['admin/footercontact/destroy'] =  'admin/setting/FooterContactController/destroy';
+$route['admin/footercontact/status'] =  'admin/setting/FooterContactController/status';
+$route['admin/footercontact/edit'] = 'admin/setting/FooterContactController/edit_data';
+$route['admin/footercontact/footercontact_update'] = 'admin/setting/FooterContactController/update_data'; 
+
+
 
 $route['admin/business'] = 'admin/business/BusinessController';
 $route['admin/query'] = 'admin/query/QueryController';

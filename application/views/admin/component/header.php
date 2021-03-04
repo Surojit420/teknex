@@ -61,7 +61,7 @@ class="sk-child sk-bounce1"></div> <div class="sk-child sk-bounce2"></div>
             <div class="nav-header">
               <!-- Navbar logo start -->
                 <a href="index.html" class="brand-logo">
-                    <img class="logo-abbr" src="<?=base_url()?>webroot/admin/images/logo.png" alt="" />
+                    <img class="logo-abbr" src="<?=base_url()?>webroot/admin/logo/nnit.png" alt="" />
                     <img class="logo-compact" src="<?=base_url()?>webroot/admin/images/logo-text.png" alt="" />
                     <img class="brand-title" src="<?=base_url()?>webroot/admin/images/logo-text.png" alt="" />
                 </a>

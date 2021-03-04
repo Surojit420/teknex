@@ -8,7 +8,7 @@
             {                
                 $this->load->view('admin/msg/error'); 
             }
-?>
+?> 
 <div class="content-body">
     <div class="container-fluid">
         <div class="row">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="<?=base_url()?>admin/add_banner" id="banner" method="post" enctype="multipart/form-data">
+                                <form action="<?=base_url()?>admin/banner_add" id="banner" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                   <div class="col-lg-12 text-center">
                                     <div class="form-group">
@@ -38,13 +38,13 @@
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Description</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft"placeholder="Enter description" ></textarea> 
+                                           <textarea rows="2" cols="30" style="resize: none;"  name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft" placeholder="Enter description" ></textarea> 
                                        </div> 
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checkbanner()"><strong>Save<strong></button>
+                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checkfile('banner_image')"><strong>Save<strong></button>
                                 </div>
                             </form>
                         </div>
@@ -87,7 +87,7 @@
                                             <input type="checkbox" class="js-switch" onchange="common_status_change(this.value,'/status')" id="status" value="<?=$value->uniqcode?>" <?=$value->status == 'Active' ? 'checked' : ''?> /></td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>')" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>','/edit')" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
 
                                                 <a href="javascript:void(0)" onclick="delete_action('<?=$value->uniqcode?>','/destroy')" class="btn btn-danger shadow btn-xs sharp" value="<?=$value->uniqcode?>"><i class="fa fa-trash"></i></a>
                                             </div>

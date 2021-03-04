@@ -14,4 +14,6 @@ toastr.success("<?php echo $this->session->flashdata('success')?>","",
 	}
 )};
 
+
+
 </script>

@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Bong Tech Admin</title>
+        <title>NNIT Solution</title>
         <meta name="description" content="Some description for the page" />
 
         <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url()?>webroot/admin/images/logo.png" /> <!-- For url icon -->
@@ -42,7 +42,7 @@
         <div class="authincation h-100">
             <div class="auth-form">
                 <div class="logo-login">
-                    <img src="<?=base_url()?>webroot/admin/images/Bongtechsolutions.png">
+                    <img class="logo-login_img" src="<?=base_url()?>webroot/admin/logo/nnit.png">
                 </div>
                 <h4 class="text-center mb-4 text-white">Sign in your account</h4>
                 <form  action="<?=base_url('verify')?>" id="login_form" method="post">

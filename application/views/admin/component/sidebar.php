@@ -23,6 +23,8 @@
                                 <li><a href="<?=base_url()?>admin/banner">Banner</a></li>
                                 <li><a href="<?=base_url()?>admin/footercontact">Footer & contact</a></li>
                                 <li><a href="<?=base_url()?>admin/client">Clients</a></li>
+                                <li><a href="<?=base_url()?>admin/service">Service</a></li>
+                                 <li><a href="<?=base_url()?>admin/aboutus">About Us</a></li>
                             </ul>
                         </li> 
                         <li>
@@ -31,7 +33,7 @@
                                 <span class="nav-text">Blogs</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="<?=base_url()?>admin/blogadd">Blog Add</a></li>
+                                <li><a href="<?=base_url()?>admin/blogs">Blog Add</a></li>
                                <!--  <li><a href="sweetalert.html">Sweet Alert</a></li>
                                 <li><a href="toster.html">Toaster</a></li> -->
                             </ul>
@@ -56,7 +58,7 @@
                         </li>  -->
                     </ul>
                     <div class="copyright">
-                        <p class="fs-14 font-w200"><strong class="font-w400">Bongtech Admin Dashboard</strong> © 2020 All Rights Reserved</p>
+                        <p class="fs-14 font-w200"><strong class="font-w400"> TekNex Admin Dashboard</strong> © 2021 All Rights Reserved</p>
                         <p>Made with <i class="fa fa-heart"></i> by Subhajit and Swapan</p>
                     </div>
                 </div>

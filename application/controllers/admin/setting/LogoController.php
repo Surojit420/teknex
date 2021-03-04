@@ -8,10 +8,10 @@ class LogoController extends CI_Controller
 
 	 	parent::__construct(); 		
 		 $this->load->helper(array('string'));		
-		// if(($this->session->userdata('adminDetails')==NULL))
-		// {
-		//    return redirect('/');
-		// }
+		if(($this->session->userdata('adminDetails')==NULL))
+		{
+		   return redirect('/');
+		}
 		$this->load->model('CommonModel');	
 		date_default_timezone_set('Asia/Kolkata');	
 	} 
@@ -20,6 +20,8 @@ class LogoController extends CI_Controller
 	{
 		$this->data['page_title'] = 'TekNex | Logo';
 		$this->data['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['type_data'] = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status<>' => 'Delete']);
+		$this->data['hide_data'] = $this->CommonModel->CountWhere('tbl_logo',['status<>' => 'Delete']);
 		$this->data['subview'] = 'setting/logo/logo';
 		$this->load->view('admin/layout/default', $this->data);
 	}
@@ -27,7 +29,7 @@ class LogoController extends CI_Controller
 	public function add_logo()
 	{
 		$name = $this->input->post('logo_name');
-			$count = $this->CommonModel->CountWhere('tbl_logo',['name' => $name ]);
+			$count = $this->CommonModel->CountWhere('tbl_logo',['name' => $name,'status<>'=>'Delete']);
 			if($count == 0)
 			{
         	$logo_upload_image='';
@@ -66,11 +68,11 @@ class LogoController extends CI_Controller
 	             	}
         		}
 
-        		$data=array(
-			'status' => 'Inactive',
-			'update_date' => date('Y-m-d H:i:s'),
-       			);
-       			$this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
+   //      		$data=array(
+			// 'status' => 'Inactive',
+			// 'update_date' => date('Y-m-d H:i:s'),
+   //     			);
+   //     			$this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'image'=>$logo_upload_image,
@@ -134,64 +136,42 @@ class LogoController extends CI_Controller
 	{
 		$uniqcode=$this->input->post('uniqcode');
 		$name=$this->input->post('name');
-		$logo_row = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-				echo '<div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Logo</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="basic-form">
-                                <form  action="'.base_url().'admin/logo/update'.'" id="logo" method="post" enctype="multipart/form-data">
-                                <div class="row">
-                                    <div class="col-lg-12 text-center">
-                                        <div class="form-group"> 
-                                           <img src="'.base_url().'webroot/admin/images/logo/'.$logo_row->image.'" id="upload_logo" onclick="get_upload_logo()" class="add_img_button">
-                                            <input type="file" class="image-upload select_image" name="image" class="validate[required]" id="logo_input_upload" style="display: none" accept=".jpg,.jpeg,.png" onchange="logo_show_photo(this)">
-                                            <span id="image_required" class="formErrorContent1 formErrorArrowBottom1" style="display: none;">Image is required</span>    
-                                        </div> 
-                                    </div>
-                                         <div class="form-group">
-                                            <label>Logo Name</label>
-                                            <input type="text" name="logo_name" id="logo_name" class="form-control validate[required]" data-errormessage-value-missing="Logo name is required" data-prompt-position="bottomLeft" placeholder="Enter Logo name" maxlength="200" value='.$logo_row->name.'>     
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checklogo()"><strong>Save<strong></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <script>
-                    $(function () 
-					{                
-   					 $("#logo").validationEngine();
-				});
-                    </script>';
-
+		$logo_row[] = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
+		$this->load->view('admin/setting/footer_contact/update', $this->data); 
 	}
 	public function status()
 	{		
         $uniqcode=$this->input->post('uniqcode'); 
        //echo $uniqcode;    
        //$this->CommonModel->GetRecordSql("selet * from tbl_logo ") 
-       $data=array(
+   //     $data=array(
+			// 'status' => 'Inactive',
+			// 'update_date' => date('Y-m-d H:i:s'),
+   //     );
+   //     $this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
+        $status = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
+        if($status->status == 'Active')
+        {
+        $data=array(
 			'status' => 'Inactive',
 			'update_date' => date('Y-m-d H:i:s'),
-       );
-       $this->CommonModel->UpdateRecord($data,'tbl_logo','status','Active'); 
-        $data=array(
-			'status' => 'Active',
-			'update_date' => date('Y-m-d H:i:s'),
        ); 
+    	}
+    	else
+    	{
+    	$data=array(
+			'status' => 'Active',
+			'update_date' => date('Y-m-d H:i:s'),	
+		);
+    	}
        	 $check =$this->CommonModel->UpdateRecord($data,'tbl_logo','uniqcode',$uniqcode); 
        	 if($check == 1)
 	  	{
 		 $this->session->set_flashdata('success', 'Status update successfully'); 
 		 $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
-	  $this->load->view('admin/setting/logo/edit', $this->logo);                    
+		$this->logo['hide_data'] = $this->CommonModel->CountWhere('tbl_logo',['status<>' => 'Delete']);
+
+	  $this->load->view('admin/setting/logo/status', $this->logo);                    
 		//echo $check;
 	  	}
 	  	else
@@ -199,11 +179,12 @@ class LogoController extends CI_Controller
 	  	$this->session->set_flashdata('error', 'Status not update');                     
 		//echo $check;
 	  	}
+	  	
 	     
 	}
-	public function destroy()
+	public function destroy($uniqcode)
 	{
-		$uniqcode = $this->input->post('uniqcode');
+		//$uniqcode = $this->input->post('uniqcode');
 		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
 		 // if($destroy_date->status == 'Active')
 		 // {
@@ -220,14 +201,17 @@ class LogoController extends CI_Controller
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Logo deleted successfully');
-			  $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
-		  	$this->load->view('admin/setting/logo/edit', $this->logo);                     
-			// redirect('admin/logo');
+		// 	  $this->logo['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
+		// $this->logo['type_data'] = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status<>' => 'Delete']);
+		// $this->logo['hide_data'] = $this->CommonModel->CountWhere('tbl_logo',['status<>' => 'Delete']);
+
+		  	//$this->load->view('admin/setting/logo/edit', $this->logo);                     
+			 redirect('admin/logo');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'Logo not deleted successfully');                     
-			 //redirect('admin/logo');
+			redirect('admin/logo');
 		  	}
 		  // }
 
