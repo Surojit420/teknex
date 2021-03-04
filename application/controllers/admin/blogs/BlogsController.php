@@ -25,13 +25,12 @@ class BlogsController extends CI_Controller
 	public function blogs_add()
 	{
 			$title_name = $this->input->post('blogs_name');
-			$link = $this->input->post('blogs_link');
 			$description = $this->input->post('description');
 
-			$count = $this->CommonModel->CountWhere('tbl_blogs',['title' => $title_name]);
+			$count = $this->CommonModel->CountWhere('tbl_blogs',['title' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
-        	$logo_upload_image='';
+        	$blogs_upload_image='';
             	if(!empty($_FILES['image']['name']))
 				{
 					$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
@@ -54,7 +53,7 @@ class BlogsController extends CI_Controller
 	                    $this->load->library('image_lib', $config);
                 		$this->image_lib->clear();
 						$this->image_lib->initialize($config);
-						$logo_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
+						$blogs_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 					    if (!$this->image_lib->resize())
 				     	{
 	        				$this->handle_error($this->image_lib->display_errors());
@@ -66,18 +65,11 @@ class BlogsController extends CI_Controller
     					}
 	             	}
         		}
-
-   //      		$data=array( 
-			// 'status' => 'Inactive',
-			// 'update_date' => date('Y-m-d H:i:s'),
-   //     			);
-   //     			$this->CommonModel->UpdateRecord($data,'tbl_blogss','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'title' => $title_name,
 				'description' => $description,
-				'image' => $logo_upload_image,
-				'description' => $description,
+				'image' => $blogs_upload_image,
 				'status' => "Active",
 				'create_date' => date('Y-m-d H:i:s'),
 				);
@@ -105,38 +97,26 @@ class BlogsController extends CI_Controller
 	public function destroy()
 	{
 		$uniqcode = $this->input->post('uniqcode');
-		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		 // if($destroy_date->status == 'Active')
-		 // {
-
-		 // }
-		 // else
-		 //{
 	      	$data=array(
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_blogs','uniqcode',$uniqcode);
-		  	//echo $check;
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'blogs deleted successfully');
 			  $this->blogs['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status<>' => 'Delete'],'id' ,'desc');
 		  	$this->load->view('admin/blogs/edit', $this->blogs);                     
-			// redirect('admin/blogs');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'blogs not deleted successfully');                     
-			// redirect('admin/blogs');
 		  	}
-		  // }
 
 	}
 	public function status()
 	{		
         $uniqcode=$this->input->post('uniqcode'); 
-       //echo $uniqcode;    
        $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_blogs',['uniqcode' => $uniqcode]);
        if($destroy_date->status == 'Active')
        {
@@ -160,13 +140,11 @@ class BlogsController extends CI_Controller
 			 echo "Status update successfully";
 			 $this->blogs['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status<>' => 'Delete'],'id' ,'desc');
 		  $this->load->view('admin/blogs/edit', $this->blogs);                    
-			//echo $check;
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'Status not update');
 		  	echo "Status not update";                 
-			//echo $check;
 		  	}
 		     
 	}
@@ -174,8 +152,85 @@ class BlogsController extends CI_Controller
 	{
 		$uniqcode=$this->input->post('uniqcode');
 		$this->data['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['uniqcode' => $uniqcode],'id' ,'desc');
-		$this->load->view('admin/blogs/image_upload', $this->data); 
+		$this->load->view('admin/blogs/upload', $this->data); 
 				
+
+	}
+	public function update_data()
+	{
+		$title_name = $this->input->post('blogs_name');
+		$link = $this->input->post('blogs_link');
+		$description = $this->input->post('description');
+		$uniqcode = $this->input->post("uniqcode");
+		$old_image = $this->input->post("old_image");		
+	    $blogs_upload_image='';
+    	if(!empty($_FILES['image']['name']))
+		{
+			$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
+            $config['allowed_types']        = '*';
+            $config['encrypt_name'] 		= TRUE;
+            $config['max_size']             = 1024;
+            $config['file_name']          	= $_FILES['image']['name'];
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image'))
+        	{
+        		$image_data = $this->upload->data();
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = $image_data['full_path']; 
+                $config['create_thumb'] = TRUE;
+					$config['maintain_ratio'] = TRUE;
+					$config['new_image']    = FCPATH.'/webroot/admin/images/blogs/'.$image_data['file_name'];
+                $config['width'] = 655;
+                $config['height'] = 468;
+                $this->load->library('image_lib', $config);
+        		$this->image_lib->clear();
+				$this->image_lib->initialize($config);
+				$blogs_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
+			    if (!$this->image_lib->resize())
+		     	{
+    				$this->handle_error($this->image_lib->display_errors());
+					}
+				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
+				if (file_exists($file))
+				{
+					unlink($file);
+				}
+				$file = FCPATH.'/webroot/admin/images/blogs/'.$old_image['file_name'];
+				if (file_exists($file))
+				{
+					unlink($file);
+				}
+         	}
+
+         	$data=array(
+			'title' => $title_name,
+			'description' => $description,
+			'image' => $blogs_upload_image,
+			'update_date' => date('Y-m-d H:i:s'),
+			);
+		}
+		else
+		{
+			$data=array(
+			'title' => $title_name,
+			'description' => $description,
+			'update_date' => date('Y-m-d H:i:s'),
+			);
+		}
+
+		$update =$this->CommonModel->UpdateRecord($data,'tbl_blogs','uniqcode',$uniqcode); 
+		if($update)
+		{
+			$this->session->set_flashdata('success', 'Blogs Updated successfully.');
+			redirect('admin/blogs');
+		}
+		else
+		{
+			$this->session->set_flashdata('error', 'Blogs Updated Unsuccessfully.');
+			redirect('admin/blogs');
+		}
+			
 
 	}
 }

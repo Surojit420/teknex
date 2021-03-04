@@ -1,7 +1,7 @@
  <!-- Footer start -->
             <div class="footer">
                 <div class="copyright">
-                    <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0)" target="_blank">Subhajit and Swapan</a> 2020</p>
+                    <p>Copyright © Designed &amp; Developed By <i class="fa fa-heart" style="color: red"></i> <a href="https://www.nitsolution.in" target="_blank">NIT Solution Pvt. Ltd.</a></p>
                 </div>
             </div>
             <!-- Footer end -->

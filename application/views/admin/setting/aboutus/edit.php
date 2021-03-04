@@ -10,8 +10,6 @@
                                         </td>
                                         <td>
                                             <?=$value->description?>
-
-                                            <!-- <input type="checkbox" class="js-switch" onchange="common_status_change(this.value,'/status')" id="status" value="<?=$value->uniqcode?>" <?=$value->status == 'Active' ? 'checked' : ''?> /> -->
                                         </td>
                                         <td>
                                              <?=$value->short_description?>

@@ -11,8 +11,8 @@
             }
         ?>
 <div class="content-body" id="data_edit"> 
+    <div id="edit_image_data">
       <?php 
-      //print_r($type_data);
         if($hide_data != 2)
         {
     ?> 
@@ -35,12 +35,6 @@
                                             <span id="image_required" class="formErrorContent1 formErrorArrowBottom1" style="display: none;">Image is required</span>    
                                         </div> 
                                     </div>
-                                   <!--  <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Logo Name</label>
-                                            <input type="text" name="logo_name" id="logo_name" class="form-control validate[required]" data-errormessage-value-missing="Logo name is required" data-prompt-position="bottomLeft" placeholder="Enter Logo name" maxlength="200">     
-                                        </div> 
-                                    </div> -->
                                      <div class="form-group">
                                                 <select class="form-control form-control-lg" name="logo_name">
                                                  <?php   
@@ -63,7 +57,7 @@
                                                  else
                                                  {
                                                  ?>
-                                                     <option>choose option</option>
+            
                                                     <option value="Logo">Logo</option>
                                                     <option value="Icons">Icons</option>
                                                     <?php
@@ -82,6 +76,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <!--  -->
     </div>
          <?php
             }
@@ -122,7 +118,7 @@
                                             <input type="checkbox" class="js-switch" onchange="common_status_change('<?=$value->uniqcode?>','/status')" id="status" value="<?=$value->uniqcode?>"  <?=$value->status == 'Active' ? 'checked' : ''?>/></td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>',/edit)" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action_logo('<?=$value->uniqcode?>','/edit')" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
                                                 <a href="<?=base_url('admin/logo/destroy/'.$value->uniqcode)?>" class="btn btn-danger shadow btn-xs sharp" value="<?=$value->uniqcode?>"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>    

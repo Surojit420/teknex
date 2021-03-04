@@ -36,7 +36,8 @@ section {
 
 body {
     margin: 0;
-    font-family: "poppins-regular", sans-serif;
+    /*font-family: "poppins-regular", sans-serif;*/
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
@@ -7871,6 +7872,7 @@ a.active {
 .footer {
     padding-left: 17.1875rem;
     background-color: #ffffff;
+    background: aliceblue;
 }
 .footer .copyright {
     padding: 0.9375rem;
@@ -7914,6 +7916,9 @@ a.active {
 .nav-header .logo-abbr {
     max-width: 218px;
 }
+.nav-header.logo-abbr:focus {
+    /*max-width: 75px !important;*/
+}
 @media only screen and (max-width: 575px) {
     .nav-header .logo-abbr {
         max-width: 35px;
@@ -7952,6 +7957,7 @@ a.active {
         padding-right: 0;
         justify-content: center;
     }
+
 }
 .nav-header .brand-title {
     margin-left: 20px;
@@ -9153,7 +9159,7 @@ The smaller device rules always should write below the bigger device rules
 Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
 */
 [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li {
-    padding: 0 0 0 20px;
+    padding: 1px 0 1px 20px;
 }
 [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li > a {
     font-size: 18px;

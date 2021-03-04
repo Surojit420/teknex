@@ -38,7 +38,7 @@
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Description</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft" placeholder="Enter description" ></textarea> 
+                                           <textarea rows="2" cols="30"      name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft" placeholder="Enter description" ></textarea> 
                                        </div> 
                                     </div>
                                 </div>
@@ -103,4 +103,3 @@
         </div>  
     </div>
 </div>
-

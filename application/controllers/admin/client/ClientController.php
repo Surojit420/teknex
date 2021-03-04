@@ -28,7 +28,7 @@ class ClientController extends CI_Controller
 			$link = $this->input->post('client_link');
 			$description = $this->input->post('description');
 
-			$count = $this->CommonModel->CountWhere('tbl_client',['title' => $title_name]);
+			$count = $this->CommonModel->CountWhere('tbl_client',['title' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
         	$logo_upload_image='';
@@ -66,12 +66,7 @@ class ClientController extends CI_Controller
     					}
 	             	}
         		}
-
-   //      		$data=array(
-			// 'status' => 'Inactive',
-			// 'update_date' => date('Y-m-d H:i:s'),
-   //     			);
-   //     			$this->CommonModel->UpdateRecord($data,'tbl_clients','status','Active'); 
+ 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'title' => $title_name,
@@ -84,7 +79,6 @@ class ClientController extends CI_Controller
 				);
 
 				$insertid = $this->CommonModel->insert($data,"tbl_client");
-				// echo $insertid;
 				if($insertid)
 				{
 					$this->session->set_flashdata('success', 'client added successfully.');
@@ -106,38 +100,27 @@ class ClientController extends CI_Controller
 	public function destroy()
 	{
 		$uniqcode = $this->input->post('uniqcode');
-		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		 // if($destroy_date->status == 'Active')
-		 // {
-
-		 // }
-		 // else
-		 //{
 	      	$data=array(
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_client','uniqcode',$uniqcode);
-		  	//echo $check;
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Client deleted successfully');
 			  $this->client['client_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_client',['status<>' => 'Delete'],'id' ,'desc');
 		  	$this->load->view('admin/client/edit', $this->client);                     
-			// redirect('admin/client');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'client not deleted successfully');                     
-			// redirect('admin/client');
 		  	}
-		  // }
 
 	}
 	public function status()
 	{		
         $uniqcode=$this->input->post('uniqcode'); 
-       //echo $uniqcode;    
+     
        $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_client',['uniqcode' => $uniqcode]);
        if($destroy_date->status == 'Active')
        {
@@ -160,12 +143,10 @@ class ClientController extends CI_Controller
 			 $this->session->set_flashdata('success', 'Status update successfully'); 
 			 $this->client['client_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_client',['status<>' => 'Delete'],'id' ,'desc');
 		  $this->load->view('admin/client/edit', $this->client);                    
-			//echo $check;
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'Status not update');                     
-			//echo $check;
 		  	}
 		     
 	}

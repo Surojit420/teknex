@@ -153,7 +153,7 @@ class AdminController extends CI_Controller
 	public function logout()
 	{ 				
 		$this->session->unset_userdata('adminDetails');				
-	    redirect('/', 'refresh');
+	    redirect('/admin', 'refresh');
 	}	
 
 	public function resetpassword()

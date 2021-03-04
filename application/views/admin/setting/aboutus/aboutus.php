@@ -44,13 +44,13 @@
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Description</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft" placeholder="Enter description" ></textarea> 
+                                           <textarea rows="2" cols="30"     name="description" id="description" class="form-control validate[required]" data-errormessage-value-missing="Description is required" data-prompt-position="bottomLeft" placeholder="Enter description" ></textarea> 
                                        </div> 
                                     </div>
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label> Short Description</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="short_description" id="short_description" class="form-control validate[required]" data-errormessage-value-missing="Short Description is required" data-prompt-position="bottomLeft" placeholder="Enter Short description" ></textarea> 
+                                           <textarea rows="2" cols="30"     name="short_description" id="short_description" class="form-control validate[required]" data-errormessage-value-missing="Short Description is required" data-prompt-position="bottomLeft" placeholder="Enter Short description" ></textarea> 
                                        </div> 
                                     </div>
                                 </div>
@@ -98,8 +98,6 @@
                                         </td>
                                         <td>
                                             <?=$value->description?>
-
-                                            <!-- <input type="checkbox" class="js-switch" onchange="common_status_change(this.value,'/status')" id="status" value="<?=$value->uniqcode?>" <?=$value->status == 'Active' ? 'checked' : ''?> /> -->
                                         </td>
                                         <td>
                                              <?=$value->short_description?>
@@ -122,4 +120,3 @@
         </div>  
     </div>
 </div>
-

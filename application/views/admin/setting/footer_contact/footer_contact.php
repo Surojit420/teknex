@@ -40,25 +40,25 @@
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Contact Address</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="address" id="address" class="form-control validate[required]" data-errormessage-value-missing="Address is required" data-prompt-position="bottomLeft"placeholder="Enter contact address" ></textarea> 
+                                           <textarea rows="2" cols="30"   name="address" id="address" class="form-control validate[required]" data-errormessage-value-missing="Address is required" data-prompt-position="bottomLeft"placeholder="Enter contact address" ></textarea> 
                                        </div> 
                                     </div>
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>About Us</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="about_us" id="about_us" class="form-control validate[required]" data-errormessage-value-missing="About is required" data-prompt-position="bottomLeft"placeholder="Enter about us" ></textarea> 
+                                           <textarea rows="2" cols="30"   name="about_us" id="about_us" class="form-control validate[required]" data-errormessage-value-missing="About is required" data-prompt-position="bottomLeft"placeholder="Enter about us" ></textarea> 
                                        </div> 
                                     </div>
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Contact Us</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="contact_us" id="contact_us" class="form-control validate[required]" data-errormessage-value-missing="Contact is required" data-prompt-position="bottomLeft"placeholder="Enter contact us" ></textarea> 
+                                           <textarea rows="2" cols="30"   name="contact_us" id="contact_us" class="form-control validate[required]" data-errormessage-value-missing="Contact is required" data-prompt-position="bottomLeft"placeholder="Enter contact us" ></textarea> 
                                        </div> 
                                     </div>
                                      <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Contact Map Iframe</label>
-                                           <textarea rows="2" cols="30" style="resize: none;"  name="contact_map" id="contact_map" class="form-control" data-errormessage-value-missing="Contact map iframe" data-prompt-position="bottomLeft"placeholder="Enter map iframe" ></textarea> 
+                                           <textarea rows="2" cols="30" name="contact_map" id="contact_map" class="form-control" data-errormessage-value-missing="Contact map iframe" data-prompt-position="bottomLeft"placeholder="Enter map iframe"  value="  "></textarea> 
                                        </div> 
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                              
 
                                           </div></td>
-                                          <td><div class="all_seller_table_width"></div></td>
+                                          <td><div class="all_seller_table_width"><?=$value->map?></div></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/footercontact/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>

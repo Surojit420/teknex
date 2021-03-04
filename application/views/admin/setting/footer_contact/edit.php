@@ -1,6 +1,6 @@
 <?php foreach ($footercontact_data as $key => $value) {
                                     ?>
-                                      <tr>
+                                     <tr>
                                         <td><?=$key+1?></td>
                                         <td><div><?=$value->email?></div></td>
                                         <td><div ><?=$value->phone?></div></td>
@@ -22,7 +22,7 @@
                                              
 
                                           </div></td>
-                                          <td><div class="all_seller_table_width"></div></td>
+                                          <td><div class="all_seller_table_width"><?=$value->map?></div></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/footercontact/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>
@@ -32,7 +32,7 @@
                                             <div class="d-flex">
                                                 <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>','/edit')" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
 
-                                                <a href="/admin/admin/footer_contact/destroy/CkNqmew93vZuRDzV0UMA2l1OTsQr76" onclick="return confirm('Are you sure delete this contact?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                 <a href="javascript:void(0)" onclick="delete_action('<?=$value->uniqcode?>','/destroy')" class="btn btn-danger shadow btn-xs sharp" value="<?=$value->uniqcode?>"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>    
                                     </tr>

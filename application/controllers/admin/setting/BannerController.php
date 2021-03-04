@@ -26,7 +26,7 @@ class BannerController extends CI_Controller
 	{
 			$title_name = $this->input->post('banner_name');
 			$description = $this->input->post('description');
-			$count = $this->CommonModel->CountWhere('tbl_banner',['title_name' => $title_name]);
+			$count = $this->CommonModel->CountWhere('tbl_banner',['title_name' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
         	$banner_upload_image='';
@@ -64,12 +64,6 @@ class BannerController extends CI_Controller
     					}
 	             	}
         		}
-
-   //      		$data=array(
-			// 'status' => 'Inactive',
-			// 'update_date' => date('Y-m-d H:i:s'),
-   //     			);
-   //     			$this->CommonModel->UpdateRecord($data,'tbl_banner','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'title_name' => $title_name,
@@ -80,7 +74,6 @@ class BannerController extends CI_Controller
 				);
 
 				$insertid = $this->CommonModel->insert($data,"tbl_banner");
-				// echo $insertid;
 				if($insertid)
 				{
 					$this->session->set_flashdata('success', 'Bannar added successfully.');
@@ -102,38 +95,26 @@ class BannerController extends CI_Controller
 	public function destroy()
 	{
 		$uniqcode = $this->input->post('uniqcode');
-		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		 // if($destroy_date->status == 'Active')
-		 // {
-
-		 // }
-		 // else
-		 //{
 	      	$data=array(
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_banner','uniqcode',$uniqcode);
-		  	//echo $check;
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Banner deleted successfully');
 			  $this->banner['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
 		  	$this->load->view('admin/setting/banner/edit', $this->banner);                     
-			// redirect('admin/logo');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'Banner not deleted successfully');                     
-			 //redirect('admin/logo');
 		  	}
-		  // }
 
 	}
 	public function status()
 	{		
-        $uniqcode=$this->input->post('uniqcode'); 
-       //echo $uniqcode;    
+        $uniqcode=$this->input->post('uniqcode');    
        $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_banner',['uniqcode' => $uniqcode]);
        if($destroy_date->status == 'Active')
        {
@@ -157,13 +138,11 @@ class BannerController extends CI_Controller
 			 echo "Status update successfully";
 			 $this->banner['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
 		  $this->load->view('admin/setting/banner/edit', $this->banner);                    
-			//echo $check;
 		  	}
 		  	else
 		  	{
 		  	echo "Status not update";
 		  	$this->session->set_flashdata('error', 'Status not update');                     
-			//echo $check;
 		  	}
 		     
 	}

@@ -1,8 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'admin/AdminController';
+$route['default_controller'] = 'users/HomeController';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+
 /*==admin==*/
+$route['admin'] = 'admin/AdminController';
 $route['verify'] = 'admin/AdminController/verify';
 $route['admin/forgotpassword'] = 'admin/AdminController/forgotpass';
 $route['admin/changepassword'] = 'admin/AdminController/resetpassword';
@@ -15,7 +20,9 @@ $route['admin/logo'] = 'admin/setting/LogoController';
 $route['admin/logo_add'] = 'admin/setting/LogoController/add_logo';
 $route['admin/logo/destroy/([a-zA-Z0-9]+)'] = 'admin/setting/LogoController/destroy/$1';
 $route['admin/logo/status'] = 'admin/setting/LogoController/status';
-$route['admin/logo/edit_data'] = 'admin/setting/LogoController/edit_data';
+$route['admin/logo/edit'] = 'admin/setting/LogoController/edit_data';
+$route['admin/logo/logo_update'] = 'admin/setting/LogoController/update_data';
+
 
 /*-----------------------Banner------------*/
 $route['admin/banner'] = 'admin/setting/BannerController';
@@ -42,7 +49,8 @@ $route['admin/blogs'] = 'admin/blogs/BlogsController';
 $route['admin/blogs_add'] = 'admin/blogs/BlogsController/blogs_add';
 $route['admin/blogs/destroy'] = 'admin/blogs/BlogsController/destroy';
 $route['admin/blogs/status'] = 'admin/blogs/BlogsController/status';
-$route['admin/blogs/edit'] = 'admin/blogs/BlogsController/edit';
+$route['admin/blogs/edit'] = 'admin/blogs/BlogsController/edit_data';
+$route['admin/blogs/blogs_update'] = 'admin/blogs/BlogsController/update_data';
 
 
 /*-----------------------Service------------*/ 
@@ -61,22 +69,31 @@ $route['admin/aboutus/edit'] = 'admin/setting/AboutusController/edit_data';
 $route['admin/aboutus/aboutus_update'] = 'admin/setting/AboutusController/update_data';
 
 
+/*-----------------------Query------------*/ 
+$route['admin/query'] = 'admin/query/query/QueryController';
 
-/*-----------------------Footer & Contact------------*/ 
+
+/*-----------------------Footer & Contact------------*/
 $route['admin/footercontact'] = 'admin/setting/FooterContactController';
-$route['admin/footercontact_add'] =  'admin/setting/FooterContactController/footcontact_add';
-$route['admin/footercontact/destroy'] =  'admin/setting/FooterContactController/destroy';
-$route['admin/footercontact/status'] =  'admin/setting/FooterContactController/status';
+$route['admin/footercontact_add'] = 'admin/setting/FooterContactController/footcontact_add';
+$route['admin/footercontact/destroy'] = 'admin/setting/FooterContactController/destroy';
+$route['admin/footercontact/status'] = 'admin/setting/FooterContactController/status';
 $route['admin/footercontact/edit'] = 'admin/setting/FooterContactController/edit_data';
-$route['admin/footercontact/footercontact_update'] = 'admin/setting/FooterContactController/update_data'; 
+$route['admin/footercontact/footercontact_update'] = 'admin/setting/FooterContactController/update_data';
+
+
+		///////*********************** USERS **************************////
+
+$route['users/home'] = 'users/HomeController';
 
 
 
-$route['admin/business'] = 'admin/business/BusinessController';
-$route['admin/query'] = 'admin/query/QueryController';
-$route['admin/edit'] = 'admin/query/QueryController';
+/*-----------------------About------------*/ 
+$route['users/about'] = 'users/about/AboutController';
 
 
 
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+
+/*-----------------------About------------*/ 
+$route['users/blog'] = 'users/blog/BlogController';
+

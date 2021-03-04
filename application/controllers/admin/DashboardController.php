@@ -15,7 +15,7 @@ class DashboardController extends CI_Controller
 	} 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Dashboard';
+		$this->data['page_title']='Dashboard';
 		$this->data['subview']='dashboard/dashboard';
 		$this->load->view('admin/layout/default', $this->data);
 	}

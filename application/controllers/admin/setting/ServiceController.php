@@ -26,7 +26,7 @@ class ServiceController extends CI_Controller
 	{
 			$title_name = $this->input->post('service_name');
 			$description = $this->input->post('description');
-			$count = $this->CommonModel->CountWhere('tbl_service',['title_name' => $title_name]);
+			$count = $this->CommonModel->CountWhere('tbl_service',['title_name' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
         	$service_upload_image='';
@@ -64,12 +64,6 @@ class ServiceController extends CI_Controller
     					}
 	             	}
         		}
-
-   //      		$data=array(
-			// 'status' => 'Inactive',
-			// 'update_date' => date('Y-m-d H:i:s'),
-   //     			);
-   //     			$this->CommonModel->UpdateRecord($data,'tbl_service','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'title_name' => $title_name,
@@ -80,7 +74,6 @@ class ServiceController extends CI_Controller
 				);
 
 				$insertid = $this->CommonModel->insert($data,"tbl_service");
-				// echo $insertid;
 				if($insertid)
 				{
 					$this->session->set_flashdata('success', 'Bannar added successfully.');
@@ -102,38 +95,25 @@ class ServiceController extends CI_Controller
 	public function destroy()
 	{
 		$uniqcode = $this->input->post('uniqcode');
-		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		 // if($destroy_date->status == 'Active')
-		 // {
-
-		 // }
-		 // else
-		 //{
 	      	$data=array(
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_service','uniqcode',$uniqcode);
-		  	//echo $check;
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'service deleted successfully');
 			  $this->service['service_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_service',['status<>' => 'Delete'],'id' ,'desc');
 		  	$this->load->view('admin/setting/service/edit', $this->service);                     
-			// redirect('admin/logo');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'service not deleted successfully');                     
-			 //redirect('admin/logo');
 		  	}
-		  // }
-
 	}
 	public function status()
 	{		
-        $uniqcode=$this->input->post('uniqcode'); 
-       //echo $uniqcode;    
+        $uniqcode=$this->input->post('uniqcode');    
        $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_service',['uniqcode' => $uniqcode]);
        if($destroy_date->status == 'Active')
        {
@@ -156,12 +136,10 @@ class ServiceController extends CI_Controller
 			 $this->session->set_flashdata('success', 'Status update successfully'); 
 			 $this->service['service_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_service',['status<>' => 'Delete'],'id' ,'desc');
 		  $this->load->view('admin/setting/service/edit', $this->service);                    
-			//echo $check;
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'Status not update');                     
-			//echo $check;
 		  	}
 		     
 	}

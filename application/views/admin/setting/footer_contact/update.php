@@ -13,6 +13,8 @@ foreach ($footercontact_data as $key => $value) {
                                 <div class="row">
                                   <div class="col-lg-12 text-center">
                                     <div class="form-group">
+                                      <input type="hidden" name="uniqcode" value="<?=$value->uniqcode?>">
+                                  <input type="hidden" name="old_image" value="<?=$value->image?>">
                                         <img src="<?=base_url()?>webroot/admin/images/footercontact/<?=$value->image?>" id="upload_fot_contact" onclick="get_upload('fot_contact_image')" class="add_img_button">
                                             <input type="file" class="image-upload select_image" name="image" class="validate[required]" id="fot_contact_image" style="display: none" accept=".jpg,.jpeg,.png" onchange="show_photo(this,'fot_contact_image','upload_fot_contact')">
                                             <span id="image_required" class="formErrorContent1 formErrorArrowBottom1" style="display: none;">Image is required</span>
@@ -68,4 +70,10 @@ foreach ($footercontact_data as $key => $value) {
                             </form>
                         </div>
                     </div>
+                    <script>
+                    $(function () 
+                    {                
+                     $("#fot_contact").validationEngine();
+                });
+                    </script>
                     <?php } ?>

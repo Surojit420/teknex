@@ -28,7 +28,7 @@ class AboutusController extends CI_Controller
 			$about_title = $this->input->post('about_title'); 
 			$description = $this->input->post('description');
 			$short_description = $this->input->post('short_description');
-			$count = $this->CommonModel->CountWhere('tbl_about_us',['company_name' => $company_name]);
+			$count = $this->CommonModel->CountWhere('tbl_about_us',['company_name' => $company_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
         	$aboutus_upload_image='';
@@ -67,11 +67,6 @@ class AboutusController extends CI_Controller
 	             	}
         		}
 
-   //      		$data=array(
-			// 'status' => 'Inactive',
-			// 'update_date' => date('Y-m-d H:i:s'),
-   //     			);
-   //     			$this->CommonModel->UpdateRecord($data,'tbl_aboutus','status','Active'); 
         		$data=array(
 				'uniqcode' => random_string('alnum',20),
 				'company_name' => $company_name,
@@ -83,7 +78,6 @@ class AboutusController extends CI_Controller
 				);
 
 				$insertid = $this->CommonModel->insert($data,"tbl_about_us");
-				// echo $insertid;
 				if($insertid)
 				{
 					$this->session->set_flashdata('success', 'aboutus added successfully.');
@@ -105,31 +99,20 @@ class AboutusController extends CI_Controller
 	public function destroy()
 	{
 		$uniqcode = $this->input->post('uniqcode');
-		 // $destroy_date = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
-		 // if($destroy_date->status == 'Active')
-		 // {
-
-		 // }
-		 // else
-		 //{
 	      	$data=array(
 	        'status'=>'Delete',
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_about_us','uniqcode',$uniqcode);
-		  	//echo $check;
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'aboutus deleted successfully');
 			  $this->aboutus['aboutus_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_about_us',['status<>' => 'Delete'],'id' ,'desc');
 		  	$this->load->view('admin/setting/aboutus/edit', $this->aboutus);                     
-			// redirect('admin/logo');
 		  	}
 		  	else
 		  	{
 		  	$this->session->set_flashdata('error', 'aboutus not deleted successfully');                     
-			 //redirect('admin/logo');
 		  	}
-		  // }
 
 	}
 	

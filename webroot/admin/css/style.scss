@@ -507,13 +507,6 @@ pre code {
 
 .logo-login {
     text-align: center;
-
-}
-
-.logo-login_img {
-    height: 49px;
-    width: 100px;
-    margin-bottom: 10px;
 }
 
 @media only screen and (max-width:575px) {
@@ -9158,7 +9151,7 @@ The smaller device rules always should write below the bigger device rules
 Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
 */
 [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li {
-    padding: 0 0 0 20px;
+    padding: 1px 0 1px 20px;
 }
 [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li > a {
     font-size: 18px;
@@ -14790,4 +14783,3 @@ code {
         }
     }
 /*Widget timeline end*/
-
