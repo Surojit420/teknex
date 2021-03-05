@@ -70,7 +70,14 @@ $route['admin/aboutus/aboutus_update'] = 'admin/setting/AboutusController/update
 
 
 /*-----------------------Query------------*/ 
-$route['admin/query'] = 'admin/query/query/QueryController';
+$route['admin/query'] = 'admin/query/QueryController';
+
+/*----------------------- Appointment------------*/ 
+$route['admin/appointment'] = 'admin/appointment/AppointmentController';
+$route['admin/appointment/destroy'] =  'admin/appointment/AppointmentController/destroy';
+
+/*----------------------- Testimonials------------*/ 
+$route['admin/testimonials'] = 'admin/testimonials/TestimonialsController';
 
 
 /*-----------------------Footer & Contact------------*/

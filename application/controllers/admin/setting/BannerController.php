@@ -25,6 +25,7 @@ class BannerController extends CI_Controller
 	public function banner_add()
 	{
 			$title_name = $this->input->post('banner_name');
+			$banner_type = $this->input->post('banner_type');
 			$description = $this->input->post('description');
 			$count = $this->CommonModel->CountWhere('tbl_banner',['title_name' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
@@ -69,6 +70,7 @@ class BannerController extends CI_Controller
 				'title_name' => $title_name,
 				'image' => $banner_upload_image,
 				'description' => $description,
+				'banner_type' => $banner_type,
 				'status' => "Active",
 				'create_date' => date('Y-m-d H:i:s'),
 				);
@@ -157,6 +159,7 @@ class BannerController extends CI_Controller
 	public function update_data()
 	{
 		$title_name = $this->input->post('banner_name');
+		$banner_type = $this->input->post('banner_type');
 		$description = $this->input->post('description');
 		$uniqcode = $this->input->post("uniqcode");
 		$old_image = $this->input->post("old_image");		
@@ -204,6 +207,7 @@ class BannerController extends CI_Controller
 			'title_name' => $title_name,
 			'image' => $banner_upload_image,
 			'description' => $description,
+			'banner_type' => $banner_type,
 			'update_date' => date('Y-m-d H:i:s'),
 			);
 		}
@@ -212,6 +216,7 @@ class BannerController extends CI_Controller
 			$data=array(
 			'title_name' => $title_name,
 			'description' => $description,
+			'banner_type' => $banner_type,
 			'update_date' => date('Y-m-d H:i:s'),
 			);
 		}

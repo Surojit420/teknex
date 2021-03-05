@@ -7,10 +7,6 @@ class TestimonialsController extends CI_Controller
 	 {
 
 	  	parent::__construct(); 		
-		if(($this->session->userdata('adminDetails')==NULL))
-		{
-		   return redirect('/');
-		}
 	 	 //$this->load->helper(array('string'));	
 	 	$this->load->model('CommonModel');	
 		date_default_timezone_set('Asia/Kolkata');

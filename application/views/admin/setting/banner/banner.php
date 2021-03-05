@@ -34,7 +34,17 @@
                                             <label>Banner Name</label>
                                             <input type="text" name="banner_name" id="banner_name" class="form-control validate[required]" data-errormessage-value-missing="Banner name is required" data-prompt-position="bottomLeft" placeholder="Enter Banner name" maxlength="200">     
                                         </div> 
+                                        <div class="form-group">
+                                            Banner Type
+                                        <select class="form-control form-control-lg" name="banner_type">
+                                            <option value="Home Banner">Home Banner</option>
+                                                <option value="About">About</option>
+                                                <option value="Blog">Blog</option>
+                                                <option value="Testimonials">Testimonials</option>
+                                        </select>
                                     </div>
+                                    </div>
+                                     
                                     <div class="col-lg-12">
                                        <div class="form-group">
                                            <label>Description</label>
@@ -67,6 +77,7 @@
                                        <th>Index</th>
                                        <th>Banner Name</th>
                                        <th>Description</th>
+                                       <th>Banner Type</th>
                                        <th>Images</th>
                                        <th>Status</th>
                                        <th>Action</th> 
@@ -79,7 +90,9 @@
                                         <td><?=$value->title_name?></td>
                                         <td><div class="all_seller_table_width">
                                             <?=$value->description?>
-                                          </div></td>
+                                          </div>
+                                      </td>
+                                      <td><?=$value->banner_type?></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/banner/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>

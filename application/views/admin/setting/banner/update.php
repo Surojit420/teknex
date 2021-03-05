@@ -24,7 +24,17 @@ foreach ($banner_data as $key => $value) { ?>
                                         <div class="form-group">
                                             <label>Banner Name</label>
                                             <input type="text" name="banner_name" id="banner_name" class="form-control validate[required]" data-errormessage-value-missing="Banner name is required" data-prompt-position="bottomLeft" value="<?=$value->title_name?>" placeholder="Enter Banner name" maxlength="200">     
-                                        </div> 
+                                        </div>
+                                         <div class="form-group">
+                                            Banner Type
+                                        <select class="form-control form-control-lg" name="banner_type">
+
+                                            <option value="Home Banner" <?=$value->banner_type == 'Home Banner' ? 'selected' : ''?>>Home Banner</option>
+                                                <option value="About" <?=$value->banner_type == 'About' ? 'selected' : ''?>>About</option>
+                                                <option value="Blog" <?=$value->banner_type == 'Blog' ? 'selected' : ''?>>Blog</option>
+                                                <option value="Testimonials" <?=$value->banner_type == 'Testimonials' ? 'selected' : ''?>>Testimonials</option>
+                                        </select>
+                                    </div> 
                                     </div>
                                     <div class="col-lg-12">
                                        <div class="form-group">

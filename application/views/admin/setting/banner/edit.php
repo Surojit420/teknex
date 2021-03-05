@@ -4,7 +4,9 @@
                                         <td><?=$value->title_name?></td>
                                         <td><div class="all_seller_table_width">
                                             <?=$value->description?>
-                                          </div></td>
+                                          </div>
+                                      </td>
+                                       <td><?=$value->banner_type?></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/banner/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>
