@@ -41,7 +41,7 @@ class FooterContactController extends CI_Controller
 					$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
 		            $config['allowed_types']        = '*';
 		            $config['encrypt_name'] 		= TRUE;
-		            $config['max_size']             = 1024;
+		            $config['max_size']             = '*';
 		            $config['file_name']          	= $_FILES['image']['name'];
 		            $this->load->library('upload', $config);
 		            $this->upload->initialize($config);
@@ -61,7 +61,7 @@ class FooterContactController extends CI_Controller
 						$footercontact_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 					    if (!$this->image_lib->resize())
 				     	{
-	        				$this->handle_error($this->image_lib->display_errors());
+	        				//$this->handle_error($this->image_lib->display_errors());
 	   					}
 	   				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
     					if (file_exists($file))
@@ -184,7 +184,7 @@ class FooterContactController extends CI_Controller
 			$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
             $config['allowed_types']        = '*';
             $config['encrypt_name'] 		= TRUE;
-            $config['max_size']             = 1024;
+            $config['max_size']             = '*';
             $config['file_name']          	= $_FILES['image']['name'];
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
@@ -204,7 +204,7 @@ class FooterContactController extends CI_Controller
 				$footercontact_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 			    if (!$this->image_lib->resize())
 		     	{
-    				$this->handle_error($this->image_lib->display_errors());
+    				//$this->handle_error($this->image_lib->display_errors());
 					}
 				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
 				if (file_exists($file))
@@ -258,90 +258,5 @@ class FooterContactController extends CI_Controller
 			
 
 	}
-
-
-	// public function update_data()
-	// {
-	// 	$email = $this->input->post('email');
-	// 	$phone = $this->input->post('phone_no');
-	// 	$footer_copy = $this->input->post('footer_copy_right');
-	// 	$contact_address = $this->input->post('address');
-	// 	$about = $this->input->post('about_us');
-	// 	$contact = $this->input->post('contact_us');
-	// 	$map = $this->input->post('map');
-	// 	$uniqcode = $this->input->post("uniqcode");
-	// 	$old_image = $this->input->post("old_image");		
-	//     $footercontact_upload_image='';
- //    	if(!empty($_FILES['image']['name']))
-	// 	{
-	// 		$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
- //            $config['allowed_types']        = '*';
- //            $config['encrypt_name'] 		= TRUE;
- //            $config['max_size']             = 1024;
- //            $config['file_name']          	= $_FILES['image']['name'];
- //            $this->load->library('upload', $config);
- //            $this->upload->initialize($config);
- //            if ($this->upload->do_upload('image'))
- //        	{
- //        		$image_data = $this->upload->data();
- //                $config['image_library'] = 'gd2';
- //                $config['source_image'] = $image_data['full_path']; 
- //                $config['create_thumb'] = TRUE;
-	// 				$config['maintain_ratio'] = TRUE;
-	// 				$config['new_image']    = FCPATH.'/webroot/admin/images/footercontact/'.$image_data['file_name'];
- //                $config['width'] = 655;
- //                $config['height'] = 468;
- //                $this->load->library('image_lib', $config);
- //        		$this->image_lib->clear();
-	// 			$this->image_lib->initialize($config);
-	// 			$footercontact_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
-	// 		    if (!$this->image_lib->resize())
-	// 	     	{
- //    				$this->handle_error($this->image_lib->display_errors());
-	// 				}
-	// 			    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
-	// 			if (file_exists($file))
-	// 			{
-	// 				unlink($file);
-	// 			}
-	// 			$file = FCPATH.'/webroot/admin/images/footercontact/'.$old_image['file_name'];
-	// 			if (file_exists($file))
-	// 			{
-	// 				unlink($file);
-	// 			}
- //         	}
-
- //         	$data=array(
-	// 		'title_name' => $title_name,
-	// 		'image' => $footercontact_upload_image,
-	// 		'description' => $description,
-	// 		'update_date' => date('Y-m-d H:i:s'),
-	// 		);
-	// 	}
-	// 	else
-	// 	{
-	// 		$data=array(
-	// 		'title_name' => $title_name,
-	// 		'description' => $description,
-	// 		'update_date' => date('Y-m-d H:i:s'),
-	// 		);
-	// 	}
-
-	// 	$update =$this->CommonModel->UpdateRecord($data,'tbl_footercontact','uniqcode',$uniqcode); 
-	// 	if($update)
-	// 	{
-	// 		$this->session->set_flashdata('success', 'Bannar Updated successfully.');
-	// 		redirect('admin/footercontact');
-	// 	}
-	// 	else
-	// 	{
-	// 		$this->session->set_flashdata('error', 'Bannar Updated Unsuccessfully.');
-	// 		redirect('admin/footercontact');
-	// 	}
-			
-
-	// }
-	
-
 
 }

@@ -78,6 +78,10 @@ $route['admin/appointment/destroy'] =  'admin/appointment/AppointmentController/
 
 /*----------------------- Testimonials------------*/ 
 $route['admin/testimonials'] = 'admin/testimonials/TestimonialsController';
+$route['admin/testimonials/destroy'] = 'admin/testimonials/TestimonialsController/destroy';
+$route['admin/testimonials/status'] = 'admin/testimonials/TestimonialsController/status';
+
+
 
 
 /*-----------------------Footer & Contact------------*/

@@ -38,7 +38,7 @@ class LogoController extends CI_Controller
 					$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
 		            $config['allowed_types']        = '*';
 		            $config['encrypt_name'] 		= TRUE;
-		            $config['max_size']             = 1024;
+		            $config['max_size']             = '*';
 		            $config['file_name']          	= $_FILES['image']['name'];
 		            $this->load->library('upload', $config);
 		            $this->upload->initialize($config);
@@ -58,7 +58,7 @@ class LogoController extends CI_Controller
 						$logo_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 					    if (!$this->image_lib->resize())
 				     	{
-	        				$this->handle_error($this->image_lib->display_errors());
+	        				//$this->handle_error($this->image_lib->display_errors());
 	   					}
 	   				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
     					if (file_exists($file))
@@ -111,7 +111,7 @@ class LogoController extends CI_Controller
 			$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
             $config['allowed_types']        = '*';
             $config['encrypt_name'] 		= TRUE;
-            $config['max_size']             = 1024;
+            $config['max_size']             = '*';
             $config['file_name']          	= $_FILES['image']['name'];
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
@@ -131,7 +131,7 @@ class LogoController extends CI_Controller
 				$logo_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 			    if (!$this->image_lib->resize())
 		     	{
-    				$this->handle_error($this->image_lib->display_errors());
+    				//$this->handle_error($this->image_lib->display_errors());
 					}
 				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
 				if (file_exists($file))

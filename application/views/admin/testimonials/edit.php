@@ -1,31 +1,4 @@
-<div class="content-body">
-    <div class="container-fluid">
-    </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Testimonials Data</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 854px">
-                                <thead>
-                                    <tr>
-                                       <th>Index</th>
-                                       <th>Name</th>
-                                       <th>Email Id</th>
-                                       <th>Phone No.</th>
-                                       <th>Image</th>
-                                       <th>Position</th>
-                                       <th>description</th>
-                                      <th>Date Time</th>  
-                                      <th>Status</th>
-                                      <th>Action</th> 
-                                    </tr>
-                                </thead>
-                                <tbody id="edit">
-                                  <?php
+<?php
                                     foreach ($testimonials_data as $key => $value) {
                                   ?>
                                         <tr>
@@ -52,12 +25,21 @@
                                         </td>     
                                     </tr>
                                   <?php } ?>
-                                   </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
-    </div>
-</div>
+                                  <script>
+                                    $(document).ready(function() 
+{            
+    var elems = document.querySelectorAll('.js-switch');                
+    for (var i = 0; i < elems.length; i++) {
+       
+        var switchery = new Switchery(elems[i], { color: '#1AB394', secondaryColor: '#ED5565', jackColor: '#ffffff', jackSecondaryColor: '#ffffff' });
+    }                        
+
+    var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
+    var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+
+    var data1 = [
+        { label: "Data 1", data: d1, color: '#17a084'},
+        { label: "Data 2", data: d2, color: '#127e68' }
+    ];
+});
+                                </script>
