@@ -11,7 +11,29 @@
                                            <?=$value->title?>
                                         </td>
                                         <td>
-                                           <?=$value->description?>
+                                          <?php
+                                        if(!empty($value->description))
+                                        {
+                                            $description = strlen($value->description) > 8 ? substr($value->description,0,8)."..." : $value->description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?>
                                         </td>
                                         <td>
                                            <?=$value->link?>
@@ -21,7 +43,7 @@
                                             <input type="checkbox" class="js-switch" onchange="common_status_change('<?=$value->uniqcode?>','/status')" id="status" value="<?=$value->uniqcode?>"  <?=$value->status == 'Active' ? 'checked' : ''?>/></td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>',/edit)" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-primary shadow btn-xs sharp mr-1" onclick="edit_action('<?=$value->uniqcode?>','/edit')" id="get_action_val_<?=$value->uniqcode?>"> <i class="fa fa-pencil"></i></a>
                                                 <a href="javascript:void(0)" onclick="delete_action('<?=$value->uniqcode?>','/destroy')" class="btn btn-danger shadow btn-xs sharp" value="<?=$value->uniqcode?>"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>    

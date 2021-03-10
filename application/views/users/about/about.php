@@ -1,15 +1,25 @@
   <!-- Breadcrumbs Start -->
-            <div class="rs-breadcrumbs img1">
+    <?php if(!empty($banner_row->image)) { ?>
+             <!-- <div class="rs-breadcrumbs img1" style="background:url(<?=base_url()?>webroot/admin/images/banner/<?=$banner_row->image?>)">  -->
+             <div class="rs-breadcrumbs img1" style="background:url(<?=base_url()?>webroot/admin/images/banner/<?php if(!empty($banner_row->image)){echo $banner_row->image;} ?>)"> 
                 <div class="breadcrumbs-inner text-center">
+
                     <h1 class="page-title">About</h1>
                     <ul>
                         <li title="Braintech - IT Solutions and Technology Startup HTML Template">
-                            <a class="active" href="index.html">Home</a>
+                            <a class="active" href="<?=base_url()?>">Home</a>
                         </li>
                         <li>About</li>
                     </ul>
+
+                    <div class="col-lg-5 col-md-12 pl-70 md-pl-15">
+                            <div class="rs-contact">
+                                
+                        </div>
+                    </div>
                 </div>
             </div>
+        <?php } ?>
             <!-- Breadcrumbs End -->
 <!-- About Section Start -->
 <?php foreach ($about_data as $key => $value) 
@@ -23,6 +33,7 @@
                                 <div class="images">
                                    <img src="<?=base_url()?>webroot/admin/images/aboutus/<?=$value->image?>" alt=""> 
                                 </div>
+
                                 <div class="middle-image2">
                                    <img class="dance3" src="images/about/effect-1.png" alt=""> 
                                 </div>
@@ -36,15 +47,15 @@
                                        <?=$value->about_title?>
                                     </h2>
                                     <div class="desc pb-35">
-                                       Over 25 years working in IT services developing software applications and mobile apps for clients all over the world.
+                                        <?=$value->short_description?>
                                     </div>
                                     <p class="margin-0 pb-15">
-                                      We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying.
+                                       <?=$value->description?>
                                     </p>
                                 </div>
-                                <div class="btn-part">
+                               <!--  <div class="btn-part">
                                     <a class="readon learn-more" href="contact.html">Learn-More</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -56,7 +67,7 @@
         <?php } ?>
             <!-- About Section End -->
             <!-- Team Section Start -->
-            <div class="rs-team pt-120 pb-120 md-pt-80 md-pb-80 xs-pb-54"> 
+           <!--  <div class="rs-team pt-120 pb-120 md-pt-80 md-pb-80 xs-pb-54"> 
                 <div class="sec-title2 text-center mb-30">
                     <span class="sub-text style-bg white-color">Team</span>
                     <h2 class="title white-color">
@@ -290,11 +301,11 @@
                         </div>
                     </div>
                 </div> 
-            </div>
+            </div> -->
             <!-- Team Section End -->
 
             <!-- Process Section Start -->
-            <div class="rs-process style2 pt-120 pb-120 md-pt-80 md-pb-73">
+           <!--  <div class="rs-process style2 pt-120 pb-120 md-pt-80 md-pb-73">
                 <div class="container">
                     <div class="sec-title2 text-center mb-45">
                         <span class="sub-text style-bg">Process</span>
@@ -353,115 +364,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Process Section End -->
 
-            <!-- Pricing section start -->
-            <div class="rs-pricing style2 gray-color pt-120 pb-143 md-pt-80 md-pb-80">
-                <div class="container">
-                    <div class="sec-title2 text-center mb-45">
-                        <span class="sub-text style-bg">Pricing</span>
-                        <h2 class="title title2">
-                           Our Pricing Plan
-                        </h2>
-                    </div>
-                   <div class="row">
-                       <div class="col-lg-4 md-mb-30">
-                           <div class="pricing-table new-style2">
-                               <div class="pricing-badge">
-                                   Silver
-                               </div>
-                               <div class="pricing-icon">
-                                   <img src="images/pricing/main-home/icons/1.png" alt="">
-                               </div>
-                               <div class="pricing-table-price">
-                                    <div class="pricing-table-bags">
-                                        <span class="pricing-currency">$</span>
-                                        <span class="table-price-text">29.99</span>
-                                        <span class="table-period">Monthly Package</span>
-                                    </div>
-                               </div>
-                               <div class="pricing-table-body">
-                                   <ul>
-                                       <li><i class="fa fa-check"></i><span>Powerful Admin Panel</span></li>
-                                       <li><i class="fa fa-check"></i><span>1 Native Android App</span></li>
-                                       <li><i class="fa fa-close"></i><span>Multi-Language Support</span></li>
-                                       <li><i class="fa fa-check"></i><span>Support via E-mail and Phone</span></li>
-                                   </ul>
-                               </div>
-                               <div class="btn-part">
-                                   <a class="readon buy-now" href="contact.html">Buy Now</a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-4 md-mb-30">
-                           <div class="pricing-table primary-bg">
-                               <div class="pricing-badge white-color-bg">
-                                   Gold
-                               </div>
-                               <div class="pricing-icon">
-                                   <img src="images/pricing/main-home/icons/2.png" alt="">
-                               </div>
-                              <div class="pricing-table-price">
-                                   <div class="pricing-table-bags">
-                                       <span class="pricing-currency">$</span>
-                                       <span class="table-price-text">39.99</span>
-                                       <span class="table-period">Monthly Package</span>
-                                   </div>
-                              </div>
-                               <div class="pricing-table-body">
-                                   <ul>
-                                        <li><i class="fa fa-check"></i><span>Powerful Admin Panel</span></li>
-                                        <li><i class="fa fa-check"></i><span>2 Native Android App</span></li>
-                                        <li><i class="fa fa-check"></i><span>Multi-Language Support</span></li>
-                                        <li><i class="fa fa-check"></i><span>Support via E-mail and Phone</span></li>
-                                   </ul>
-                               </div>
-                               <div class="btn-part">
-                                   <a class="readon buy-now" href="contact.html">Buy Now</a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-4">
-                           <div class="pricing-table new-style2">
-                               <div class="pricing-badge">
-                                   Platinum
-                               </div>
-                               <div class="pricing-icon">
-                                   <img src="images/pricing/main-home/icons/3.png" alt="">
-                               </div>
-                                <div class="pricing-table-price">
-                                     <div class="pricing-table-bags">
-                                         <span class="pricing-currency">$</span>
-                                         <span class="table-price-text">79.99</span>
-                                         <span class="table-period">Monthly Package</span>
-                                     </div>
-                                </div>
-                               <div class="pricing-table-body">
-                                   <ul>
-                                        <li><i class="fa fa-check"></i><span>Powerful Admin Panel</span></li>
-                                        <li><i class="fa fa-check"></i><span>3 Native Android App</span></li>
-                                        <li><i class="fa fa-check"></i><span>Multi-Language Support</span></li>
-                                        <li><i class="fa fa-check"></i><span>Support via E-mail and Phone</span></li>
-                                   </ul>
-                               </div>
-                               <div class="btn-part">
-                                   <a class="readon buy-now" href="contact.html">Buy Now</a>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                </div>
-            </div>
-            <!-- Pricing section end -->
+           
 
             <!-- Counter Section Start -->
             <div class="rs-contact-wrap bg5 pt-120 pb-390 md-pt-80">
                <div class="container">
                  <div class="sec-title2 text-center mb-30">
-                     <span class="sub-text style-bg white-color">Contact</span>
+                     <span class="sub-text style-bg white-color">Schedule Your Appointment</span>
                      <h2 class="title white-color">
-                        Request A Free Consultation
+                       We here to help you 24/7 with experts
                      </h2>
                  </div>           
                </div>
@@ -475,39 +389,32 @@
                         <div class="col-lg-6 padding-0">
                             <div class="video-item">
                                 <div class="rs-videos">
-                                    <div class="animate-border main-home style2">
-                                        <a class="popup-border popup-videos" href="https://www.youtube.com/watch?v=YLN1Argi7ik">
-                                            <i class="fa fa-play"></i>
-                                        </a>
-                                    </div>
+                                
                                 </div> 
                             </div>
                         </div>
                         <div class="col-lg-6 padding-0">
                             <div class="rs-requset">                              
-                                <div id="form-messages"></div>
-                                <form id="contact-form" method="post" action="mailer.php">
+                               <!--  <div id="form-messages"></div> -->
+                                <form id="contact-form" method="post" action="<?=base_url()?>appointment">
                                     <fieldset>
                                         <div class="row">
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="name" name="name" placeholder="Name" required="">
+                                            <div class="col-lg-12 mb-30 col-md-6 col-sm-6">
+                                                <input class="from-control" type="text" id="name" name="name" placeholder="Name" required>
                                             </div> 
+                                             <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
+                                                <input class="from-control" type="email" id="email" name="email" placeholder="E-Mail" required>
+                                            </div>    
                                             <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="email" name="email" placeholder="E-Mail" required="">
-                                            </div>   
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="phone" name="phone" placeholder="Phone Number" required="">
-                                            </div>   
-                                            <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="Website" name="subject" placeholder="Your Website" required="">
-                                            </div>
+                                                <input class="from-control" type="number" id="phone" name="phone" placeholder="Phone Number" required>
+                                            </div> 
                                       
                                             <div class="col-lg-12 mb-45">
-                                                <textarea class="from-control" id="message" name="message" placeholder="Your message Here" required=""></textarea>
+                                                <textarea class="from-control" id="message" name="description" placeholder="Your description" required></textarea>
                                             </div>
                                         </div>
                                         <div class="btn-part">
-                                          <a class="submit sub-small" href="#">Submit Now</a>
+                                           <button class="submit sub-small" >Submit Now</button>
                                         </div> 
                                     </fieldset>
                                 </form> 

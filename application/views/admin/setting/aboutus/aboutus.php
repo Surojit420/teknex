@@ -38,7 +38,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>About Title</label>
-                                            <input type="text" name="about_title" id="about_title" class="form-control validate[required]" data-errormessage-value-missing="About Title is required" data-prompt-position="bottomLeft" placeholder="Enter About Title" maxlength="200">     
+                                             <input type="text" name="about_title" id="about_title" class="form-control validate[required]" data-errormessage-value-missing="About Title is required" data-prompt-position="bottomLeft" placeholder="Enter About Title" maxlength="200">     
                                         </div> 
                                     </div>
                                     <div class="col-lg-12">
@@ -53,10 +53,11 @@
                                            <textarea rows="2" cols="30"     name="short_description" id="short_description" class="form-control validate[required]" data-errormessage-value-missing="Short Description is required" data-prompt-position="bottomLeft" placeholder="Enter Short description" ></textarea> 
                                        </div> 
                                     </div>
+                                 
                                 </div>
                                 <div class="col-sm-12">
                                     <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checkfile('aboutus_image')"><strong>Save<strong></button>
+                                    <button type="submit" class="btn btn-primary save_submit" style="margin-left: 756px;" onclick="checkfile('aboutus_image')"><strong>Save<strong></button>
                                 </div>
                             </form>
                         </div>
@@ -90,17 +91,80 @@
                                             <tr>
                                         <td><?=$key+1?></td>
                                         <td><?=$value->company_name?></td>
-                                        <td><div class="all_seller_table_width">
-                                            <?=$value->description?>
-                                          </div></td>
+                                        <td> <?php
+                                        if(!empty($value->about_title))
+                                        {
+                                            $about_title = strlen($value->about_title) > 8 ? substr($value->about_title,0,8)."..." : $value->about_title;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $about_title.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->about_title;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/aboutus/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>
                                         <td>
-                                            <?=$value->description?>
+                                        <?php
+                                        if(!empty($value->description))
+                                        {
+                                            $description = strlen($value->description) > 8 ? substr($value->description,0,8)."..." : $value->description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?>
                                         </td>
-                                        <td>
-                                             <?=$value->short_description?>
+                                        <td><?php
+                                        if(!empty($value->short_description))
+                                        {
+                                            $short_description = strlen($value->about_title) > 8 ? substr($value->short_description,0,8)."..." : $value->short_description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $short_description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->short_description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?>
                                         </td>
                                         <td>
                                             <div class="d-flex">

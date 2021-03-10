@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*-------------------------------------project controller---------------------------------------------*/
 class ClientController extends CI_Controller 
 {
 	function __construct() 
@@ -17,9 +17,15 @@ class ClientController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Clients';
+		$this->data['page_title']=' project	';
 		$this->data['subview']='client/client';
 		$this->data['client_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_client',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data); 
 	}
 	public function client_add()
@@ -31,7 +37,7 @@ class ClientController extends CI_Controller
 			$count = $this->CommonModel->CountWhere('tbl_client',['title' => $title_name,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
-        	$logo_upload_image='';
+        	$client_upload_image='';
             	if(!empty($_FILES['image']['name']))
 				{
 					$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
@@ -54,7 +60,7 @@ class ClientController extends CI_Controller
 	                    $this->load->library('image_lib', $config);
                 		$this->image_lib->clear();
 						$this->image_lib->initialize($config);
-						$logo_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
+						$client_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 					    if (!$this->image_lib->resize())
 				     	{
 	        				//$this->handle_error($this->image_lib->display_errors());
@@ -71,7 +77,7 @@ class ClientController extends CI_Controller
 				'uniqcode' => random_string('alnum',20),
 				'title' => $title_name,
 				'description' => $description,
-				'image' => $logo_upload_image,
+				'image' => $client_upload_image,
 				'link' => $link,
 				'description' => $description,
 				'status' => "Active",
@@ -105,6 +111,12 @@ class ClientController extends CI_Controller
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_client','uniqcode',$uniqcode);
+		  	$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_client',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/client/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Client deleted successfully');
@@ -198,10 +210,10 @@ class ClientController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/client/'.$old_image['file_name'];
-				if (file_exists($file))
+				$old_file = FCPATH.'/webroot/admin/images/banner/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 

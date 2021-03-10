@@ -1,32 +1,49 @@
-<!-- Blog Section Start -->
+  <!-- Breadcrumbs Start -->
+  <!-- <div class="rs-breadcrumbs " style="background:url(<?=base_url()?>webroot/admin/images/banner/<?=$banner_row->image?>)"> -->
+    <?php if(!empty($banner_row->image)) { ?>
+     <div class="rs-breadcrumbs img1" style="background:url(<?=base_url()?>webroot/admin/images/banner/<?php if(!empty($banner_row->image)){echo $banner_row->image;} ?>)"> 
+                <div class="breadcrumbs-inner text-center">
+                    <h1 class="page-title">Blog</h1>
+                    <ul>
+                        <li title="Braintech - IT Solutions and Technology Startup HTML Template">
+                            <a class="active" href="<?=base_url()?>">Home</a>
+                        </li>
+                       <li>Blog</li>
+                    </ul>
+                </div>
+            </div>
+            <?php }?>
+            <!-- Breadcrumbs End -->
+
+            <!-- Blog Section Start -->
             <div class="rs-inner-blog pt-120 pb-120 md-pt-90 md-pb-90">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-12 order-last">
-                            <div class="widget-area">
-                                <div class="search-widget mb-50">
-                                    <div class="search-wrap">
-                                        <input type="search" placeholder="Searching..." name="s" class="search-input" value="">
-                                        <button type="submit" value="Search"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
+                            <div class="widget-area">                                
                                 <div class="recent-posts mb-50">
                                     <div class="widget-title">
                                         <h3 class="title">Latest Posts</h3>
-                                    </div>
-                                    <div class="recent-post-widget">
+                                    </div> 
+                                    <?php foreach ($title as $key => $value) 
+                                    {
+                                       ?>     
+                                     <div class="recent-post-widget">
                                         <div class="post-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/1.jpg" alt=""></a>
+                                            <a href="<?=base_url()?>blog_details/<?=slugify($value->title)?>?uid=<?=$value->uniqcode?>"><img src="<?=base_url()?>webroot/admin/images/blogs/<?=$value->image?>" alt=""></a>
                                         </div>
                                         <div class="post-desc">
-                                            <a href="blog-details.html">Pen Source Job Report Show More Openings Fewer </a>
+                                            
+                                            <a href="<?=base_url()?>blog_details/<?=slugify($value->title)?>?uid=<?=$value->uniqcode?>"><?=$value->title?> </a>
+                                            <!-- <a href="<?=base_url()?>blog_details/<?=$value->uniqcode?>"><?=$value->title?> </a> -->
                                             <span class="date">
                                                 <i class="fa fa-calendar"></i>
-                                                January 21, 2020
+                                                 <?=date('F j, Y', strtotime($value->create_date))?>
                                             </span>
                                         </div>
-                                    </div>
-                                    <div class="recent-post-widget">
+                                    </div> 
+                                <?php } ?>
+                                   <!--  <div class="recent-post-widget">
                                         <div class="post-img">
                                             <a href="blog-details.html"><img src="images/blog/inner/2.jpg" alt=""></a>
                                         </div>
@@ -61,358 +78,50 @@
                                                 January 21, 2020
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="categories mb-50">
-                                    <div class="widget-title">
-                                        <h3 class="title">Categories</h3>
-                                    </div>
-                                    <ul>
-                                        <li><a href="#">Application Testing</a></li>
-                                        <li><a href="#">Artifical Intelligence</a></li>
-                                        <li><a href="#">Digital Technology</a></li>
-                                        <li><a href="#">IT Services</a></li>
-                                        <li><a href="software-development.html">Software Development</a></li>
-                                        <li><a href="web-development.html">Web Development</a></li>
-                                    </ul>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-lg-8 pr-35 md-pr-15">
                             <div class="row">
-                                <?php foreach ($blog_data as $key => $value) {
-                                 ?>
+								<?php foreach($blogs_data as $service_row){ ?>
                                 <div class="col-lg-12 mb-50">
                                     <div class="blog-item">
                                         <div class="blog-img">
-                                            <a href="blog-details.html"><img src="<?=base_url()?>webroot/admin/images/blogs/<?=$value->image?>" alt=""></a>
+                                            <a href="<?=base_url()?>blog_details/<?=slugify($service_row->title)?>?uid=<?=$service_row->uniqcode?>"><img src="<?=base_url()?>webroot/admin/images/blogs/<?=$service_row->image?>" alt=""></a>
                                             <ul class="post-categories">
-                                                <li><a href="blog-details.html">Application Testing</a></li>
+                                                <li><a href="<?=base_url()?>blog_details/<?=slugify($service_row->title)?>?uid=<?=$service_row->uniqcode?>">Application Testing</a></li>
                                             </ul>
                                         </div>
                                         <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html"><?=$value->title?></a></h3>
+                                            <h3 class="blog-title"><a href="<?=base_url()?>blog_details/<?=slugify($service_row->title)?>?uid=<?=$service_row->uniqcode?>">
+											<?=$service_row->title?>
+											</a></h3>
                                             <div class="blog-meta">
                                                 <ul class="btm-cate">
                                                     <li>
                                                         <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
+                                                            <i class="fa fa-calendar-check-o"></i>  <?=date('F j, Y', strtotime($service_row->create_date))?>                                                        
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
+                                                            <i class="fa fa-user"></i> Admin  
                                                         </div>
                                                     </li> 
                                                 </ul>
                                             </div>
                                             <div class="blog-desc">   
-                                               <?=$value->description?>         
+											<?=$service_row->description?>
                                             </div>
                                             <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
+                                                <a class="blog-btn" href="<?=base_url()?>blog_details/<?=slugify($service_row->title)?>?uid=<?=$service_row->uniqcode?>">Continue Reading</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php } ?>
-                                <!-- <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/2.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">Application Testing</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Tech Products That Makes Its Easier to Stay at Home</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/3.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">Application Testing</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Necessity May Give Us Your Best Virtual Court System</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/4.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-single">Application Testing</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Servo Project Joins The Linux Foundation Fold Desco</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/5.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">Software Development</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Servo Project Joins The Linux Foundation Fold Desco</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/6.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">Software Development</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Necessity May Give Us Your Best Virtual Court System</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/7.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">Web Development</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Tech Products That Makes Its Easier to Stay at Home</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/8.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-details.html">It Services</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Open Source Job Report Show More Openings Fewer</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-50">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/9.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-single">Artifical Intelligence</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Types of Social Proof What its Makes Them Effective</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="col-lg-12">
-                                    <div class="blog-item">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html"><img src="images/blog/inner/10.jpg" alt=""></a>
-                                            <ul class="post-categories">
-                                                <li><a href="blog-single">Digital Technology</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="blog-content">
-                                            <h3 class="blog-title"><a href="blog-details.html">Tech Firms Support Huawei Restriction, Balk at Cost</a></h3>
-                                            <div class="blog-meta">
-                                                <ul class="btm-cate">
-                                                    <li>
-                                                        <div class="blog-date">
-                                                            <i class="fa fa-calendar-check-o"></i> January 10, 2020                                                        
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="author">
-                                                            <i class="fa fa-user"></i> admin  
-                                                        </div>
-                                                    </li> 
-                                                </ul>
-                                            </div>
-                                            <div class="blog-desc">   
-                                                We denounce with righteous indige nation and dislike men who are so beguiled and demo realized by the charms of pleasure of the moment, so blinded by desire, that...           
-                                            </div>
-                                            <div class="blog-button inner-blog">
-                                                <a class="blog-btn" href="blog-details.html">Continue Reading</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
+								<?php } ?>
                             </div>
                         </div>
                     </div> 

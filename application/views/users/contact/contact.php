@@ -1,4 +1,22 @@
- <div class="rs-contact pt-120 md-pt-80">
+<!-- Breadcrumbs Start -->
+            <!-- <div class="rs-breadcrumbs img3" style="background:url(<?=base_url()?>webroot/admin/images/banner/<?=$banner_row->image?>)"> -->
+              <?php if(!empty($banner_row->image)) { ?>
+               <div class="rs-breadcrumbs img1" style="background:url(<?=base_url()?>webroot/admin/images/banner/<?php if(!empty($banner_row->image)){echo $banner_row->image;} ?>)"> 
+                <div class="breadcrumbs-inner text-center">
+                    <h1 class="page-title">Contact</h1>
+                    <ul>
+                        <li>
+                            <a class="active" href="<?=base_url()?>">Home</a>
+                        </li>
+                       <li>Contact</li>
+                    </ul>
+                </div>
+            </div>
+          <?php }?>
+            <!-- Breadcrumbs End -->
+
+            <!-- Contact Section Start -->
+            <div class="rs-contact pt-120 md-pt-80">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 md-mb-60">
@@ -7,13 +25,14 @@
                                     <span class="sub-text new-text white-color">Let's Talk</span>
                                     <h2 class="title white-color">Speak With Expert Engineers.</h2>
                                 </div>
+                                <?php if(!empty($contact_data)) { ?>
                                <div class="address-box mb-25">
                                    <div class="address-icon">
                                        <i class="fa fa-home"></i>
                                    </div>
                                    <div class="address-text">
                                         <span class="label">Email:</span>
-                                        <a href="tel:123222-8888">(123) 222-8888</a>
+                                        <a href="mailto:<?=$contact_data->email?>"><?=$contact_data->email?></a>
                                    </div>
                                </div>
                                <div class="address-box mb-25">
@@ -22,7 +41,7 @@
                                    </div>
                                    <div class="address-text">
                                        <span class="label">Phone:</span>
-                                       <a href="#">support@nitsolutions.com</a>
+                                       <a href="tel:<?=$contact_data->phone?>"><?=$contact_data->phone?></a>
                                    </div>
                                </div>
                                <div class="address-box">
@@ -31,9 +50,10 @@
                                    </div>
                                    <div class="address-text">
                                        <span class="label">Address:</span>
-                                       <div class="desc">New Jesrsy, 1201, USA</div>
+                                       <div class="desc"><?=$contact_data->contact_address?></div>
                                    </div>
                                </div>
+                             <?php }?>
                            </div>
                         </div> 
                         <div class="col-lg-8 pl-70 md-pl-15">
@@ -43,8 +63,8 @@
                                    <h2 class="title testi-title">Fill The Form Below</h2>
 
                                </div>
-                                <div id="form-messages"></div>
-                                <form id="contact-form" method="post" action="mailer.php">
+                                
+                                <form  method="post" action="<?=base_url()?>contact_add">
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
@@ -54,10 +74,10 @@
                                                 <input class="from-control" type="text" id="email" name="email" placeholder="E-Mail" required="">
                                             </div>   
                                             <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="phone" name="phone" placeholder="Phone Number" required="">
+                                                <input class="from-control" type="number" id="phone" name="phone" placeholder="Phone Number" required="">
                                             </div>   
                                             <div class="col-lg-6 mb-30 col-md-6 col-sm-6">
-                                                <input class="from-control" type="text" id="Website" name="subject" placeholder="Your Website" required="">
+                                                <input class="from-control" type="text" id="Website" name="subject" placeholder="Your Website" >
                                             </div>
                                       
                                             <div class="col-lg-12 mb-30">
@@ -75,8 +95,10 @@
                         </div>
                     </div>
                 </div>
+				<?php if(!empty($contact_data->map)){?>
                 <div class="map-canvas pt-120 md-pt-80">
-                    <iframe src="https://maps.google.com/maps?q=nitsolutions&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+				<?=$contact_data->map?>">   
                 </div> 
+				<?php } ?>
             </div>
             <!-- Contact Section Start -->

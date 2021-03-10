@@ -1,4 +1,4 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'users/HomeController';
@@ -34,12 +34,12 @@ $route['admin/banner/banner_update'] = 'admin/setting/BannerController/update_da
 
 
 /*-----------------------Clients------------*/
-$route['admin/client'] = 'admin/client/ClientController';
+$route['admin/project'] = 'admin/client/ClientController';
 $route['admin/client_add'] = 'admin/client/ClientController/client_add';
-$route['admin/client/destroy'] = 'admin/client/ClientController/destroy';
-$route['admin/client/status'] = 'admin/client/ClientController/status';
-$route['admin/client/edit'] = 'admin/client/ClientController/edit_data';
-$route['admin/client/client_update'] = 'admin/client/ClientController/update_data';
+$route['admin/project/destroy'] = 'admin/client/ClientController/destroy';
+$route['admin/project/status'] = 'admin/client/ClientController/status';
+$route['admin/project/edit'] = 'admin/client/ClientController/edit_data';
+$route['admin/project/client_update'] = 'admin/client/ClientController/update_data';
 
 
 
@@ -69,6 +69,16 @@ $route['admin/aboutus/edit'] = 'admin/setting/AboutusController/edit_data';
 $route['admin/aboutus/aboutus_update'] = 'admin/setting/AboutusController/update_data';
 
 
+/*-----------------------Product------------*/ 
+$route['admin/product'] = 'admin/product/ProductController';
+$route['admin/product_add'] =  'admin/product/ProductController/product_add'; 
+$route['admin/product/destroy'] =  'admin/product/ProductController/destroy';
+$route['admin/product/edit'] = 'admin/product/ProductController/edit_data';
+$route['admin/product/product_update'] = 'admin/product/ProductController/update_data';
+$route['admin/product/status'] =  'admin/product/ProductController/status';
+
+
+
 /*-----------------------Query------------*/ 
 $route['admin/query'] = 'admin/query/QueryController';
 
@@ -93,18 +103,42 @@ $route['admin/footercontact/edit'] = 'admin/setting/FooterContactController/edit
 $route['admin/footercontact/footercontact_update'] = 'admin/setting/FooterContactController/update_data';
 
 
-		///////*********************** USERS **************************////
+///////*********************** USERS **************************////
 
-$route['users/home'] = 'users/HomeController';
+$route['home'] = 'users/HomeController';
 
-
-
-/*-----------------------About------------*/ 
-$route['users/about'] = 'users/about/AboutController';
-
-
-
+//BLOG//
+//$route['blog'] = 'users/blogs/BlogsController';
 
 /*-----------------------About------------*/ 
-$route['users/blog'] = 'users/blog/BlogController';
+$route['about'] = 'users/about/AboutController';
 
+/*-----------------Appointment-------------*/
+
+$route['appointment'] = 'users/appointment/AppointmentController/appointment_add';
+
+
+/*----------------Testimonials--------------*/
+
+$route['testimonials'] = 'users/testimonials/TestimonialsController';
+$route['testimonial_add'] = 'users/testimonials/TestimonialsController/testimonials_add';
+
+
+
+/*-----------------------blog------------*/ 
+$route['blog'] = 'users/blog/BlogController';
+$route['blog_details/(:any)'] = 'users/blog/BlogController/blog_detalis/$1';
+// $route['blog_details/([a-zA-Z0-9]+)'] = 'users/blog/BlogController/blog_detalis/$1';
+
+
+/*-----------------------Contact------------*/
+$route['contact'] = 'users/contact/ContactController';
+$route['contact_add'] = 'users/contact/ContactController/contact_add';
+
+/*-----------------------project------------*/
+$route['project'] = 'users/project/ProjectController';
+
+
+
+/*-----------------------product------------*/
+$route['product'] = 'users/product/ProductController';

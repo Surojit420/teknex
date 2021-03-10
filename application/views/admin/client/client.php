@@ -1,4 +1,4 @@
-<!-------------------------------------------load page----------------------------------------------------->
+ <!-------------------------------------------load page----------------------------------------------------->
 
  <?php
             if($this->session->flashdata('success'))
@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">client</h4>
+                            <h4 class="card-title">Project</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
@@ -32,14 +32,14 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>name</label>
-                                            <input type="text" name="client_name" id="client_name" class="form-control validate[required]" data-errormessage-value-missing="client name is required" data-prompt-position="bottomLeft" placeholder="Enter client name" maxlength="200">     
+                                            <label> Project Name</label>
+                                            <input type="text" name="client_name" id="client_name" class="form-control validate[required]" data-errormessage-value-missing="Project name is required" data-prompt-position="bottomLeft" placeholder="Enter Project name" maxlength="200">     
                                         </div> 
                                     </div>
                                      <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Link</label>
-                                            <input type="text" name="client_link" id="client_link" class="form-control validate[url]" data-errormessage-value-missing="client link is required" data-prompt-position="bottomLeft" placeholder="Enter client link" maxlength="200">     
+                                            <input type="text" name="client_link" id="client_link" class="form-control validate[url]" data-errormessage-value-missing="Project link is required" data-prompt-position="bottomLeft" placeholder="Enter Project link" maxlength="200">     
                                         </div> 
                                     </div>
                                     <div class="col-lg-12">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checkfile('client_image')"><strong>Save<strong></button>
+                                    <button type="submit" class="btn btn-primary save_submit" style="margin-left: 756px;" onclick="checkfile('client_image')"><strong>Save<strong></button>
                                 </div>
                             </form>
                         </div>
@@ -64,7 +64,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">client Image</h4>
+                        <h4 class="card-title">Project Data</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -72,10 +72,10 @@
                                 <thead>
                                     <tr>
                                        <th>Index</th>
-                                       <th>client Image</th>
-                                        <th>client Name</th>
-                                        <th>client Desription</th>
-                                         <th>client Link</th>
+                                       <th>Project Image</th>
+                                        <th>Project Name</th>
+                                        <th>Project Desription</th>
+                                         <th>Project Link</th>
                                        <th>Status</th>
                                        <th>Action</th> 
                                     </tr>
@@ -94,7 +94,29 @@
                                            <?=$value->title?>
                                         </td>
                                         <td>
-                                           <?=$value->description?>
+                                            <?php
+                                        if(!empty($value->description))
+                                        {
+                                            $description = strlen($value->description) > 8 ? substr($value->description,0,8)."..." : $value->description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?>
                                         </td>
                                          <td>
                                            <?=$value->link?>

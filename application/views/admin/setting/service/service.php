@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <button class="btn btn-warning btn-primary pull-right m-t-n-xs grediant-btn" type="reset"><strong>Cancel</strong></button>
-                                    <button type="submit" class="btn btn-primary" style="margin-left: 756px;" onclick="checkfile('service_image')"><strong>Save<strong></button>
+                                    <button type="submit" class="btn btn-primary save_submit" style="margin-left: 756px;" onclick="checkfile('service_image')"><strong>Save<strong></button>
                                 </div>
                             </form>
                         </div>
@@ -77,9 +77,29 @@
                                             <tr>
                                         <td><?=$key+1?></td>
                                         <td><?=$value->title_name?></td>
-                                        <td><div class="all_seller_table_width">
-                                            <?=$value->description?>
-                                          </div></td>
+                                        <td> <?php
+                                        if(!empty($value->description))
+                                        {
+                                            $description = strlen($value->description) > 8 ? substr($value->description,0,8)."..." : $value->description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/service/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>

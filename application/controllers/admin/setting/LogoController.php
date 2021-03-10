@@ -18,11 +18,17 @@ class LogoController extends CI_Controller
 	
 	public function index()
 	{
-		$this->data['page_title'] = 'TekNex | Logo';
+		$this->data['page_title'] = ' Logo';
 		$this->data['logo_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_logo',['status<>' => 'Delete'],'id' ,'desc');
 		$this->data['type_data'] = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status<>' => 'Delete']);
 		$this->data['hide_data'] = $this->CommonModel->CountWhere('tbl_logo',['status<>' => 'Delete']);
 		$this->data['subview'] = 'setting/logo/logo';
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 
@@ -138,10 +144,10 @@ class LogoController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/logo/'.$old_image['file_name'];
-				if (file_exists($file))
+				$old_file = FCPATH.'/webroot/admin/images/banner/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 
@@ -212,7 +218,15 @@ class LogoController extends CI_Controller
 	        'status'=>'Delete',
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
+
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_logo','uniqcode',$uniqcode);
+		  	$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/logo/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
+
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Logo deleted successfully');                     

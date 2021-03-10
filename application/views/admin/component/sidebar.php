@@ -22,7 +22,8 @@
                                 <li><a href="<?=base_url()?>admin/logo">Logo</a></li>
                                 <li><a href="<?=base_url()?>admin/banner">Banner</a></li>
                                 <li><a href="<?=base_url()?>admin/footercontact">Footer & contact</a></li>
-                                <li><a href="<?=base_url()?>admin/client">Clients</a></li>
+                                <li><a href="<?=base_url()?>admin/project">Project</a></li>
+                                 <li><a href="<?=base_url()?>admin/product">Product</a></li>
                                 <li><a href="<?=base_url()?>admin/service">Service</a></li>
                                  <li><a href="<?=base_url()?>admin/aboutus">About Us</a></li>
                             </ul>
@@ -38,13 +39,13 @@
                         </li>
                         <li>
                             <a href="<?=base_url()?>admin/appointment" class="ai-icon" aria-expanded="false">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <span class="nav-text">Appointment</span>
                             </a>
                         </li> 
                           <li>
                             <a href="<?=base_url()?>admin/testimonials" class="ai-icon" aria-expanded="false">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                <i class="fa fa-users" aria-hidden="true"></i>
                                 <span class="nav-text">Testimonials</span>
                             </a>
                         </li> 
@@ -64,8 +65,10 @@
                         if (!empty($first_name)) {
                             echo $first_name.' '.$last_name;
                         }
-                        ?></strong> © <?=date('Y')?> All Rights Reserved</p>
-                        <p>Design & Developed By <i class="fa fa-heart" style="color: red"></i> NIT Solution Pvt. Ltd.</p>
+                        ?></strong><!--  © <?=date('Y')?> All Rights Reserved --></p>
+                        <?php if(!empty($contact_data)) { ?>
+                        <p><?=$contact_data->footer_copyright?><!-- <i class="fa fa-heart" style="color: red"></i> --></p>
+                    <?php }?>
                     </div>
                 </div>
             </div>

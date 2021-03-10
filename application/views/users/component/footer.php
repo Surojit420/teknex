@@ -1,5 +1,5 @@
 
-		</div> 
+		</div>   
         <!-- Main content End -->
      
         <!-- Footer Start -->
@@ -7,30 +7,29 @@
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 footer-widget">
-                            <div class="footer-logo mb-30">
-                                <a href="index.html"><img src="<?= base_url() ?>webroot/users/images/logo-dark.png" alt=""></a>
+                        <div class="col-lg-4 col-md-12 col-sm-12 footer-widget">
+                             <?php if(!empty($logo->image)) { ?>
+                                <div class="footer-logo mb-30">
+                                <a href="<?= base_url() ?>"><img src="<?= base_url()?>webroot/admin/images/logo/<?php if(!empty($logo->image)) { echo $logo->image; }?>" alt=""></a>
                             </div>
-                              <div class="textwidget pb-30"><p>Sedut perspiciatis unde omnis iste natus error sitlutem acc usantium doloremque denounce with illo inventore veritatis</p>
+                        <?php } ?>
+                             <?php if(!empty($contact_data)) { ?>
+                              <div class="textwidget pb-30"><p><?=$contact_data->about_us?></p>
                               </div>
                               <ul class="footer-social md-mb-30">  
-                                  <li> 
-                                      <a href="#" target="_blank"><span><i class="fa fa-facebook"></i></span></a> 
-                                  </li>
-                                  <li> 
-                                      <a href="# " target="_blank"><span><i class="fa fa-twitter"></i></span></a> 
-                                  </li>
-
-                                  <li> 
-                                      <a href="# " target="_blank"><span><i class="fa fa-pinterest-p"></i></span></a> 
-                                  </li>
-                                  <li> 
-                                      <a href="# " target="_blank"><span><i class="fa fa-instagram"></i></span></a> 
-                                  </li>
+                                  <?php
+                                    $data=array();
+                                $data=unserialize($contact_data->social);
+                                   foreach ($data as $key => $value) {
+                             ?>
+                                        <li><a href="<?=$value?>"><i class="fa fa-<?=$key?>"></i></a></li>
+                                    <?php }?>
                                                                            
                               </ul>
+                              <?php }?> 
                         </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 pl-45 md-pl-15 md-mb-30">
+                    
+                        <div class="col-lg-4 col-md-12 col-sm-12 pl-45 md-pl-15 md-mb-30">
                             <h3 class="widget-title">IT Services</h3>
                             <ul class="site-map">
                                 <li><a href="software-development.html">Software Development</a></li>
@@ -40,23 +39,24 @@
                                 <li><a href="product-design.html">Product Design</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 md-mb-30">
+                        <div class="col-lg-4 col-md-12 col-sm-12 md-mb-30">
+                            <?php if(!empty($contact_data)) { ?>
                             <h3 class="widget-title">Contact Info</h3>
                             <ul class="address-widget">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    <div class="desc">374 FA Tower, William S Blvd 2721, IL, USA</div>
+                                    <div class="desc"><?=$contact_data->contact_address?></div>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
                                     <div class="desc">
-                                       <a href="tel:(+880)155-69569">(+880)155-69569</a>
+                                       <a href="tel:(+880)155-69569"><?=$contact_data->phone?></a>
                                     </div>
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o"></i>
                                     <div class="desc">
-                                        <a href="mailto:support@nitsolutions.com">support@nitsolutions.com</a>
+                                        <a href="<?=$contact_data->email?>"><?=$contact_data->email?></a>
                                     </div>
                                 </li>
                                 <li>
@@ -66,16 +66,8 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12">
-                            <h3 class="widget-title">Newsletter</h3>
-                            <p class="widget-desc">We denounce with righteous and in and dislike men who are so beguiled and demo realized.</p>
-                            <p>
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="">
-                                <em class="paper-plane"><input type="submit" value="Sign up"></em>
-                                <i class="fa fa-send"></i>
-                            </p>
-                        </div>
+                        <?php }?>
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -84,17 +76,22 @@
                     <div class="row y-middle">
                         <div class="col-lg-6 text-right md-mb-10 order-last">
                             <ul class="copy-right-menu">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="faq.html">FAQs</a></li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">FAQs</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-6">
-                            <div class="copyright">                                
+                            <!-- <div class="copyright">                                
 							<p>&copy; 2021 All Rights Reserved. Developed By <i class="fa fa-heart" style="color: red"></i> <a href="https://www.nitsolution.in" target="_blank">NIT Solution Pvt. Ltd.</a></p>
+                            </div> -->
+                            <?php if(!empty($contact_data)) { ?>
+                            <div class="copyright">                                
+                            <p>&copy;<?=$contact_data->footer_copyright?><!--  <i class="fa fa-heart" style="color: red"></i> <a href="https://www.nitsolution.in" target="_blank"> --><!-- NIT Solution Pvt. Ltd. --></a></p>
                             </div>
+                        <?php } ?>
                         </div>
                     </div>
                 </div>

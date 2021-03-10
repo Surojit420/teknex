@@ -8,13 +8,29 @@
                                         <td><?=$value->moblie_no?></td>
                                         <td><?=$value->image?></td>
                                         <td><?=$value->position?></td>
-                                        <td><div class="all_seller_table_width">
-                                          <span id="more_about_quNdnI3gshbUlGPjwmECxko5yrv1Ku">
-                                               <?=$value->description?>                                                <a href="javascript:void(0)" onclick="show_more_about('quNdnI3gshbUlGPjwmECxko5yrv1Ku')">more</a>                                            </span>
-                                            <span id="less_about_quNdnI3gshbUlGPjwmECxko5yrv1Ku" style="display: none" >
-                                                  Test                                                  <a onclick="show_less_about('quNdnI3gshbUlGPjwmECxko5yrv1Ku')" href="javascript:void(0)">less</a>                                            </span>
-                                              
-                                          </div></td>
+                                        <td> <?php
+                                        if(!empty($value->description))
+                                        {
+                                            $description = strlen($value->description) > 8 ? substr($value->description,0,8)."..." : $value->description;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $description.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->description;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?></td>
                                           <td><div style="min-width: max-content;"> <?=$value->create_date?></div></td>
                                            <td>
                                             <input type="checkbox" class="js-switch" onchange="common_status_change(this.value,'/status')" id="status" value="<?=$value->uniqcode?>" <?=$value->status == 'Active' ? 'checked' : ''?> /></td>

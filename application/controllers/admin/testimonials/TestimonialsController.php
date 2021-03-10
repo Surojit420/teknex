@@ -13,9 +13,15 @@ class TestimonialsController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Testimonials';
+		$this->data['page_title']=' Testimonials';
 		$this->data['subview']='testimonials/testimonials';
 		$this->data['testimonials_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_testimonials',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 	public function destroy()

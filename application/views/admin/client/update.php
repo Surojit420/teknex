@@ -5,7 +5,7 @@
 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">client</h4>
+                            <h4 class="card-title">Project</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
@@ -22,14 +22,14 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>name</label>
-                                            <input type="text" name="client_name" id="client_name" class="form-control validate[required]" data-errormessage-value-missing="client name is required" data-prompt-position="bottomLeft"  value="<?=$value->title?>" placeholder="Enter client name" maxlength="200">     
+                                            <label>Project Name</label>
+                                            <input type="text" name="client_name" id="client_name" class="form-control validate[required]" data-errormessage-value-missing="Project name is required" data-prompt-position="bottomLeft"  value="<?=$value->title?>" placeholder="Enter Project name" maxlength="200">     
                                         </div> 
                                     </div>
                                      <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Link</label>
-                                            <input type="text" name="client_link" id="client_link" class="form-control validate[required]" data-errormessage-value-missing="client link is required" data-prompt-position="bottomLeft" value="<?=$value->link?>" placeholder="Enter client link" maxlength="200">     
+                                            <input type="text" name="client_link" id="client_link" class="form-control validate[required]" data-errormessage-value-missing="Project link is required" data-prompt-position="bottomLeft" value="<?=$value->link?>" placeholder="Enter Project link" maxlength="200">     
                                         </div> 
                                     </div>
                                     <div class="col-lg-12">

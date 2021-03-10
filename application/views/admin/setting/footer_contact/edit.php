@@ -6,23 +6,42 @@
                                         <td><div ><?=$value->phone?></div></td>
                                         <td><div class="all_seller_table_width"><?=$value->footer_copyright?></div></td>
                                         <td><div class="all_seller_table_width"><?=$value->contact_address?></div></td>
-                                        <td><div class="all_seller_table_width">
-                                          
-                                            <span id="more_about_CkNqmew93vZuRDzV0UMA2l1OTsQr76">
-                                                Our proces......                                                <a href="javascript:void(0)" onclick="show_more_about('CkNqmew93vZuRDzV0UMA2l1OTsQr76')">more</a>                                            </span>
-                                            <span id="less_about_CkNqmew93vZuRDzV0UMA2l1OTsQr76" style="display: none" >
-                                                  Our process starts with meeting clients and understanding their requirement properly, this helps us in making research and planning for their problem and providing them with solutions accordingly to achieve their business goals. After completion of the pl                                                  <a onclick="show_less_about('CkNqmew93vZuRDzV0UMA2l1OTsQr76')" href="javascript:void(0)">less</a>                                            </span>
-                                              
-                                          </div></td>
-                                        <td><div class="all_seller_table_width">
-                                                                                      <span id="more_contact_CkNqmew93vZuRDzV0UMA2l1OTsQr76">
-                                                If you are......                                                <a href="javascript:void(0)" onclick="show_more_contact('CkNqmew93vZuRDzV0UMA2l1OTsQr76')">more</a>                                            </span>
-                                            <span id="less_contact_CkNqmew93vZuRDzV0UMA2l1OTsQr76" style="display: none" >
-                                                  If you are looking for high-quality web designing and development, software development and mobile application development you can contact us Bongtech Solution Pvt ltd we have a team of experts who specializes in IT solution, we have dedicated our efforts                                                  <a onclick="show_less_contact('CkNqmew93vZuRDzV0UMA2l1OTsQr76')" href="javascript:void(0)">less</a>                                            </span>
-                                             
+                                       <td>
+                                        <?php
+                                        if(!empty($value->about_us))
+                                        {
+                                            $about_us = strlen($value->about_us) > 8 ? substr($value->about_us,0,8)."..." : $value->about_us;
 
-                                          </div></td>
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $about_us.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->about_us;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?>
+                            </td>
                                           <td><div class="all_seller_table_width"><?=$value->map?></div></td>
+                                          <td> <ul class="footer-social md-mb-30">  
+                                  <?php
+                                    $data=array();
+                                $data=unserialize($value->social);
+                                   foreach ($data as $keys => $values) {
+                             ?>
+                                        <li><a href="<?=$values?>"><i class="fa fa-<?=$keys?>"></i></a></li>
+                                    <?php }?>
+                                                                           
+                              </ul></td>
                                         <td>
                                             <img src="<?=base_url()?>webroot/admin/images/footercontact/<?=$value->image?>" class="showTableImage" id="product_img">
                                         </td>

@@ -17,9 +17,15 @@ class BannerController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Banner';
+		$this->data['page_title']=' Banner';
 		$this->data['subview']='setting/banner/banner';
 		$this->data['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 	public function banner_add()
@@ -48,7 +54,7 @@ class BannerController extends CI_Controller
 	                    $config['create_thumb'] = TRUE;
 	 					$config['maintain_ratio'] = TRUE;
 	 					$config['new_image']    = FCPATH.'/webroot/admin/images/banner/'.$image_data['file_name'];
-	                    $config['width'] = 655;
+	                    $config['width'] = 1280;
 	                    $config['height'] = 468;
 	                    $this->load->library('image_lib', $config);
                 		$this->image_lib->clear();
@@ -102,6 +108,12 @@ class BannerController extends CI_Controller
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_banner','uniqcode',$uniqcode);
+		  		$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_banner',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/banner/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'Banner deleted successfully');
@@ -179,9 +191,9 @@ class BannerController extends CI_Controller
                 $config['image_library'] = 'gd2';
                 $config['source_image'] = $image_data['full_path']; 
                 $config['create_thumb'] = TRUE;
-					$config['maintain_ratio'] = TRUE;
-					$config['new_image']    = FCPATH.'/webroot/admin/images/banner/'.$image_data['file_name'];
-                $config['width'] = 655;
+				$config['maintain_ratio'] = TRUE;
+				$config['new_image']    = FCPATH.'/webroot/admin/images/banner/'.$image_data['file_name'];
+                $config['width'] = 1280;
                 $config['height'] = 468;
                 $this->load->library('image_lib', $config);
         		$this->image_lib->clear();
@@ -196,10 +208,11 @@ class BannerController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/banner/'.$old_image['file_name'];
-				if (file_exists($file))
+				
+				$old_file = FCPATH.'/webroot/admin/images/banner/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 

@@ -27,14 +27,29 @@
                                         <td><?=$key+1?></td>
                                         <td><?=$value->name?></td>
                                         <td><?=$value->email?></td>
-                                        <td><div class="all_seller_table_width">
-                                          
-                                            <span id="more_about_quNdnI3gshbUlGPjwmECxko5yrv1Ku">
-                                               <?=$value->massage?>                                                <a href="javascript:void(0)" onclick="show_more_about('quNdnI3gshbUlGPjwmECxko5yrv1Ku')">more</a>                                            </span>
-                                            <span id="less_about_quNdnI3gshbUlGPjwmECxko5yrv1Ku" style="display: none" >
-                                                  Test                                                  <a onclick="show_less_about('quNdnI3gshbUlGPjwmECxko5yrv1Ku')" href="javascript:void(0)">less</a>                                            </span>
-                                              
-                                          </div></td>
+                                        <td> <?php
+                                        if(!empty($value->massage))
+                                        {
+                                            $massage = strlen($value->massage) > 8 ? substr($value->massage,0,8)."..." : $value->massage;
+
+                                        ?>
+                                        <div id="more_ks_desc_<?=$value->uniqcode?>" >
+                                            <?php
+                                                echo $massage.'...';
+                                            ?>
+                                            <?php
+                                                echo '<a href="javascript:void(0)" onclick="show_more_ks_desc(\''.$value->uniqcode.'\')">more</a>';
+                                            ?>
+                                        </div>
+                                        <div id="less_ks_desc_<?=$value->uniqcode?>" style="display: none" class="all_seller_table_width">
+                                            <?php
+                                                echo $value->massage;
+                                            ?>
+                                            <?php
+                                                echo '<a onclick="show_less_ks_desc(\''.$value->uniqcode.'\')" href="javascript:void(0)">less</a>';
+                                            ?>
+                                        </div>
+                                        <?php } ?></td>
                                           <td><div style="min-width: max-content;">2021-02-17 01:26:54</div></td>   
                                     </tr>
                                   <?php } ?>

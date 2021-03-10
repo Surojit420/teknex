@@ -33,6 +33,7 @@ foreach ($banner_data as $key => $value) { ?>
                                                 <option value="About" <?=$value->banner_type == 'About' ? 'selected' : ''?>>About</option>
                                                 <option value="Blog" <?=$value->banner_type == 'Blog' ? 'selected' : ''?>>Blog</option>
                                                 <option value="Testimonials" <?=$value->banner_type == 'Testimonials' ? 'selected' : ''?>>Testimonials</option>
+                                                <option value="Contact" <?=$value->banner_type == 'Contact' ? 'selected' : ''?>>Contact</option>
                                         </select>
                                     </div> 
                                     </div>

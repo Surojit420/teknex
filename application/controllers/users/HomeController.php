@@ -17,10 +17,25 @@ class HomeController extends CI_Controller
 	public function index()
 	{		
 		$this->data['page_title']='Home';
-		$this->data['subview']='home/index';
-		$this->data['banner_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_banner',['status' => 'Active'],'id' ,'desc');
+		$this->data['subview']='home/index';		
 		$this->data['service_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_service',['status' => 'Active'],'id' ,'desc');
 		$this->data['blog_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status' => 'Active'],'id' ,'desc');
+		$this->data['project_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_client',['status' => 'Active'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']); 
+		$this->data['testimonials']=$this->CommonModel->RetriveRecordByWhereOrderby('tbl_testimonials',['status' => 'Active'],'id' ,'desc'); 
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
+
+		$this->db->where('status','Active');
+		$this->db->where('banner_type','Home Banner');
+		$this->db->order_by('id','desc');
+		$banner_row = $this->db->get('tbl_banner')->row();
+		$this->data['banner_row']=$banner_row;
+// pr($banner_row); exit;
+		// $this->data['contact_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_footercontact',['status' => 'Active'],'id' ,'desc');
 		// $this->data['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status<>' => 'Delete'],'id' ,'desc');
 		// $this->data['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status<>' => 'Delete'],'id' ,'desc');
 		// $this->load->view('admin/layout/default', $this->data);

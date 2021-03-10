@@ -17,9 +17,15 @@ class QueryController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Query';
+		$this->data['page_title']=' Query';
 		$this->data['subview']='query/query';
 		$this->data['query_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_query',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 	

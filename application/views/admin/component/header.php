@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -6,8 +6,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title><?=$page_title;?></title>
         <meta name="description" content="Some description for the page" />
-
-        <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url()?>webroot/admin/images/logo.png" /> <!-- For url icon -->
+<link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>webroot/admin/images/logo/<?php if(!empty($icon->image)) { echo $icon->image; }?>" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/bootstrap-select.min.css"/> <!-- For bootstrap select --> 
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>webroot/admin/css/variable.scss"/> <!-- For scss
 variables -->
@@ -62,10 +61,12 @@ class="sk-child sk-bounce1"></div> <div class="sk-child sk-bounce2"></div>
         <div id="main-wrapper">
             <div class="nav-header">
               <!-- Navbar logo start -->
+               <?php if(!empty($logo->image)) { ?>
                 <a href="<?=base_url()?>" class="brand-logo">
-                    <img class="logo-abbr" src="<?=base_url()?>webroot/admin/images/nit.png" alt="" />
-                    <img class="logo-compact" src="<?=base_url()?>webroot/admin/images/nit.png" alt="" />
+                    <img class="logo-abbr" src="<?= base_url()?>webroot/admin/images/logo/<?php if(!empty($logo->image)) { echo $logo->image; }?>" alt="" />
+                    <img class="logo-compact" src="<?= base_url()?>webroot/admin/images/logo/<?php if(!empty($logo->image)) { echo $logo->image; }?>" alt="" />
                 </a>
+            <?php } ?>
               <!-- Navbar logo end -->
 
               <!-- Navbar open close button start -->
@@ -100,8 +101,10 @@ class="sk-child sk-bounce1"></div> <div class="sk-child sk-bounce2"></div>
                                                 ?>
                                             </span>
                                         </div>
-                                        <img src="<?=base_url()?>webroot/admin/images/nit.png" width="20" alt="" />
+                                         <?php if(!empty($logo->image)) { ?>
+                                        <img src="<?= base_url()?>webroot/admin/images/logo/<?php if(!empty($logo->image)) { echo $logo->image; }?>" width="20" alt="" />
                                     </a>
+                                <?php }?>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         
                                          <a href="<?=base_url('admin/changepassword')?>" class="dropdown-item ai-icon">

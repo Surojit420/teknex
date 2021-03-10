@@ -17,21 +17,30 @@ class FooterContactController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | FooterContact';
+		$this->data['page_title']=' FooterContact';
 		$this->data['subview']='setting/footer_contact/footer_contact';
 		$this->data['footcontact_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_footercontact',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 	public function footcontact_add()
 	{
-			
-			$email = $this->input->post('email');
-			$phone = $this->input->post('phone_no');
-			$footer_copy = $this->input->post('footer_copy_right');
-			$contact_address = $this->input->post('address');
-			$about = $this->input->post('about_us');
-			$contact = $this->input->post('contact_us');
-			$map = $this->input->post('contact_map');
+		$email = $this->input->post('email');
+		$phone = $this->input->post('phone_no');
+		$footer_copy = $this->input->post('footer_copy_right');
+		$contact_address = $this->input->post('address');
+		$short_about =  $this->input->post('about_us');
+		$map = $this->input->post('contact_map');
+		$facebook_link = $this->input->post('facebook');
+		$twitter_link = $this->input->post('twitter');
+		$pinterest_link = $this->input->post('pinterest-p');	
+		$instagram_link = $this->input->post('instagram');
+		$socal=serialize(array('facebook'=> $facebook_link,'linkedin' =>$pinterest_link,'twitter' =>$twitter_link,'instagram'=>$instagram_link));
 			$count = $this->CommonModel->CountWhere('tbl_footercontact',['email' => $email,'phone'=>$phone,'status<>'=>'Delete']);
 			if($count == 0) 
 			{
@@ -77,9 +86,9 @@ class FooterContactController extends CI_Controller
 				'image' => $footercontact_upload_image,
 				'footer_copyright' =>$footer_copy,
 				'contact_address' => $contact_address,
-				'about_us' => $about,
-				'contact_us' => $contact,
-				// 'map' => $map,
+				'about_us' => $short_about,
+				'map' => $map,
+				'social' => $socal, 
 				'status' => "Active",
 				'create_date' => date('Y-m-d H:i:s'),
 				);
@@ -112,6 +121,12 @@ class FooterContactController extends CI_Controller
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_footercontact','uniqcode',$uniqcode);
+		  		$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_footercontact',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/footercontact/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'footercontact deleted successfully');
@@ -172,9 +187,13 @@ class FooterContactController extends CI_Controller
 		$phone = $this->input->post('phone_no');
 		$footer_copy = $this->input->post('footer_copy_right');
 		$contact_address = $this->input->post('address');
-		$about = $this->input->post('about_us');
-		$contact = $this->input->post('contact_us');
+		$short_about =  $this->input->post('about_us');
 		$map = $this->input->post('contact_map');
+		$facebook_link = $this->input->post('facebook');
+		$twitter_link = $this->input->post('twitter');
+		$pinterest_link = $this->input->post('linkedin');	
+		$instagram_link = $this->input->post('instagram');
+		$socal=serialize(array('facebook'=> $facebook_link,'linkedin' =>$pinterest_link,'twitter' =>$twitter_link,'instagram'=>$instagram_link));
 		$count = $this->CommonModel->CountWhere('tbl_footercontact',['email' => $email,'phone'=>$phone]);
 		$uniqcode = $this->input->post("uniqcode");
 		$old_image = $this->input->post("old_image");		
@@ -211,10 +230,10 @@ class FooterContactController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/footercontact/'.$old_image['file_name'];
-				if (file_exists($file))
+				$old_file = FCPATH.'/webroot/admin/images/footercontact/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 
@@ -224,8 +243,8 @@ class FooterContactController extends CI_Controller
 				'image' => $footercontact_upload_image,
 				'footer_copyright' =>$footer_copy,
 				'contact_address' => $contact_address,
-				'about_us' => $about,
-				'contact_us' => $contact,
+				'about_us' => $short_about,
+				'social' => $socal, 
 				 'map' => $map,
 				'update_date' => date('Y-m-d H:i:s'),
 				);
@@ -237,8 +256,8 @@ class FooterContactController extends CI_Controller
 				'phone' => $phone,
 				'footer_copyright' =>$footer_copy,
 				'contact_address' => $contact_address,
-				'about_us' => $about,
-				'contact_us' => $contact,
+				'about_us' => $short_about,
+				'social' => $socal, 
 				'map' => $map,
 				'update_date' => date('Y-m-d H:i:s'),
 				);

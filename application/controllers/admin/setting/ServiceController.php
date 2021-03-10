@@ -17,9 +17,15 @@ class ServiceController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Service';
+		$this->data['page_title']=' Service';
 		$this->data['subview']='setting/service/service';
 		$this->data['service_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_service',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data);
 	}
 	public function service_add()
@@ -100,6 +106,12 @@ class ServiceController extends CI_Controller
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_service','uniqcode',$uniqcode);
+		  	$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_service',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/service/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'service deleted successfully');
@@ -157,7 +169,7 @@ class ServiceController extends CI_Controller
 		$description = $this->input->post('description');
 		$uniqcode = $this->input->post("uniqcode");
 		$old_image = $this->input->post("old_image");		
-	    $banner_upload_image='';
+	    $service_upload_image='';
     	if(!empty($_FILES['image']['name']))
 		{
 			$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
@@ -180,7 +192,7 @@ class ServiceController extends CI_Controller
                 $this->load->library('image_lib', $config);
         		$this->image_lib->clear();
 				$this->image_lib->initialize($config);
-				$banner_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
+				$service_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
 			    if (!$this->image_lib->resize())
 		     	{
     				//$this->handle_error($this->image_lib->display_errors());
@@ -190,16 +202,16 @@ class ServiceController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/service/'.$old_image['file_name'];
-				if (file_exists($file))
+				$old_file = FCPATH.'/webroot/admin/images/service/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 
          	$data=array(
 			'title_name' => $title_name,
-			'image' => $banner_upload_image,
+			'image' => $service_upload_image,
 			'description' => $description,
 			'update_date' => date('Y-m-d H:i:s'),
 			);

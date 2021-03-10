@@ -17,9 +17,15 @@ class BlogsController extends CI_Controller
 	 } 
 	public function index()
 	{		
-		$this->data['page_title']='TekNex | Blogss';
+		$this->data['page_title']=' Blogs';
 		$this->data['subview']='blogs/blogs';
 		$this->data['blogs_data'] = $this->CommonModel->RetriveRecordByWhereOrderby('tbl_blogs',['status<>' => 'Delete'],'id' ,'desc');
+		$this->data['icon']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Icons']); 
+		$this->data['logo']=$this->CommonModel->RetriveRecordByWhereRow('tbl_logo',['status' => 'Active','name'=>'Logo']);
+		$this->db->where('status','Active');
+		$this->db->order_by('id','desc');
+		$contact = $this->db->get('tbl_footercontact')->row();
+		$this->data['contact_data']=$contact;
 		$this->load->view('admin/layout/default', $this->data); 
 	}
 	public function blogs_add()
@@ -102,6 +108,12 @@ class BlogsController extends CI_Controller
 	        'update_date'=>date('Y-m-d H:i:s'),
 	    	);
 		  	$check=$this->CommonModel->UpdateRecord($data,'tbl_blogs','uniqcode',$uniqcode);
+		  	$delete_file = $this->CommonModel->RetriveRecordByWhereRow('tbl_blogs',['uniqcode' => $uniqcode]);
+		  	$file = FCPATH.'/webroot/admin/images/blogs/'.$delete_file->image;
+			if (file_exists($file))
+			{
+				unlink($file);
+			}
 		  	if($check == 1)
 		  	{
 			 $this->session->set_flashdata('success', 'blogs deleted successfully');
@@ -196,10 +208,10 @@ class BlogsController extends CI_Controller
 				{
 					unlink($file);
 				}
-				$file = FCPATH.'/webroot/admin/images/blogs/'.$old_image['file_name'];
-				if (file_exists($file))
+				$old_file = FCPATH.'/webroot/admin/images/blogs/'.$old_image;
+				if (file_exists($old_file))
 				{
-					unlink($file);
+					unlink($old_file);
 				}
          	}
 

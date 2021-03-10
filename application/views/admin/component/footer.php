@@ -1,8 +1,10 @@
  <!-- Footer start -->
             <div class="footer">
+                <?php if(!empty($contact_data)) { ?>
                 <div class="copyright">
-                    <p>Copyright © Designed &amp; Developed By <i class="fa fa-heart" style="color: red"></i> <a href="https://www.nitsolution.in" target="_blank">NIT Solution Pvt. Ltd.</a></p>
+                    <p><?=$contact_data->footer_copyright?><!-- <i class="fa fa-heart" style="color: red"></i> <a href="https://www.nitsolution.in" target="_blank"></a> --></p>
                 </div>
+            <?php }?>
             </div>
             <!-- Footer end -->
         </div>
