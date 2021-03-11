@@ -29,7 +29,7 @@
 
                                </div>
                                 
-                                <form  method="post" action="<?=base_url()?>testimonial_add">
+                                <form  method="post" action="<?=base_url()?>testimonial_add" enctype="multipart/form-data">
                                     <fieldset>
 
                                         <div class="row">
@@ -46,11 +46,11 @@
                                                 <input class="from-control" type="text" id="Website" name="subject" placeholder="Your Position" >
                                             </div>
                                             <div class="col-lg-12 mb-30">
-                                                <input class="from-control" type="file" id="Website" name="photo" placeholder="Your photo" >
+                                                <input class="from-control" type="file" id="Website" name="image"  accept=".jpg,.jpeg,.png" placeholder="Your photo" onchange="show_photo(this,'aboutus_image','upload_aboutus')" >
                                             </div>
                                       
                                             <div class="col-lg-12 mb-30">
-                                                <textarea class="from-control" id="message" name="message" placeholder="Your message Here" required=""></textarea>
+                                                <textarea class="from-control" id="message" name="massage" placeholder="Your message Here" required=""></textarea>
                                             </div>
                                         </div>
                                         <div class="btn-part">                                            
@@ -111,7 +111,7 @@
                             <div class="author-desc">                                
                                 <div class="desc"><img class="quote" src="<?=base_url()?>webroot/users/images/testimonial/main-home/quote2.png" alt=""><?=$value->description?></div>
                                 <div class="author-img">
-                                    <img src="<?=base_url()?>webroot/admin/images/testimonials/testimonials.png" alt="">
+                                    <img src="<?=base_url()?>webroot/admin/images/testimonials/<?=$value->image?>" alt="">
                                 </div>
                             </div>
                             <div class="author-part">

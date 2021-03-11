@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2021 at 06:24 PM
+-- Generation Time: Mar 11, 2021 at 06:21 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -95,7 +95,23 @@ CREATE TABLE `tbl_appointment` (
 --
 
 INSERT INTO `tbl_appointment` (`id`, `uniqcode`, `name`, `email`, `moblie_no`, `description`, `status`, `create_date`) VALUES
-(4, 'rMePvT2VtzXRgc1ks3YS', 'sdcvfb', 'asd@gmail.com', '44444', 'knhjgcf', 'Inactive', '2021-03-10 11:16:14');
+(4, 'rMePvT2VtzXRgc1ks3YS', 'sdcvfb', 'asd@gmail.com', '44444', 'knhjgcf', 'Inactive', '2021-03-10 11:16:14'),
+(5, 'P6nOg12eVRbYHFGS4K8I', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:14'),
+(6, 'y6QGmsSYwvLVWI4Jhq9c', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:17'),
+(7, 'ZXnTQ6ECNYaikKp1gj2y', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:19'),
+(8, 'H72VW9wRfUgnibE5PLcI', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:19'),
+(9, 'J6CYH8mDA59ZkbKjQegt', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:20'),
+(10, '05qXcrIMvKtfA1F2yJoD', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:24'),
+(11, 'o4ZlUz3cVR58YIhfWiHN', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:24'),
+(12, 'zvpo64XVmwlnb7s9HcJ0', 'asknsdakd', 'bcaprogramup@gmail.com', '451236368877', 'sdfg', 'Inactive', '2021-03-10 23:13:24'),
+(13, '87BbJpcoedWFDqfOPN3Q', 'qsADFSDGF', 'bcaprogramup@gmail.com', '45212', 'asdf', 'Inactive', '2021-03-10 23:18:04'),
+(14, '235lYrihfEGwK7DdBzcV', 'sACD', 'bcaprogramup@gmail.com', '51145646', 'JHVGCF', 'Inactive', '2021-03-10 23:21:49'),
+(15, 'cWonz5xqaDdH9vPkblAj', 'suroji', 'bcaprogram@gmail.com', '452113369', 'Zaxscdvsdsf', 'Inactive', '2021-03-10 23:25:55'),
+(16, 'RYhcvzrGfkB6osZLUWKn', 'sscdv', 'bcaprogram@gmail.com', '4521785', 'asdf', 'Inactive', '2021-03-10 23:27:25'),
+(17, 'rSe30Y1tEJoWwAD9Ljuf', 'fsdfsdfg', 'bcaprogramup@gmail.com', '4521785', 'dvxfgh', 'Inactive', '2021-03-10 23:48:51'),
+(18, '5revVODltLhW4B9Go2Na', 'surojit', 'bcaprogramup@gmail.com', '4521369871', 'snnsnd', 'Inactive', '2021-03-11 11:42:19'),
+(19, 'ngGtSBJujkcOy18pFYrU', 'babu sona', 'babuson@gmail.com', '4521339870', 'zXCxzzxzxz', 'Inactive', '2021-03-11 12:00:40'),
+(20, 'AzlDEurf3BV8SG4v9sH7', 'zx', 'zXcv@gmail.com', '4555', 'asdfgh', 'Inactive', '2021-03-11 12:01:55');
 
 -- --------------------------------------------------------
 
@@ -184,6 +200,35 @@ INSERT INTO `tbl_client` (`id`, `uniqcode`, `title`, `description`, `image`, `li
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_contact`
+--
+
+CREATE TABLE `tbl_contact` (
+  `id` int(11) NOT NULL,
+  `uniqcode` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `image` text NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `status` enum('Inactive','Active','Delete') NOT NULL,
+  `create_date` datetime NOT NULL,
+  `update_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_contact`
+--
+
+INSERT INTO `tbl_contact` (`id`, `uniqcode`, `name`, `phone`, `email`, `address`, `image`, `description`, `status`, `create_date`, `update_date`) VALUES
+(1, 'knjbhvg', 'babu', '8436993268', 'babu@gmail.com', 'sjanjanf', 'dssffsfs', 'sdfdsff', 'Delete', '2021-03-24 18:03:42', '2021-03-11 18:49:36'),
+(2, 'DyKtPCkTzXdBh2Sqe59M', 'adsdf', 'cvcbvn', 'bcaprogramup@gmail.com', 'aXZDZzXCa', 'd04e736344a15a369e2cc02181b412d6_thumb.jpg', 'zxcdvf bxc v', 'Active', '2021-03-11 18:35:09', '2021-03-11 19:07:08'),
+(3, 'upIG3a5mhYwqEv4bez7t', 'NNIT SOLUITION', '84366993268', 'NNIT@gmail.com', 'Dum Dum Cantonment,Near pump house,Kolkata -700065, India', '7ed0ddefc0de6c6768883b76eed28c99_thumb.jpg', 'A company description (sometimes referred to as an “about me” or “bio” section) is defined as a general overview of your company as well as who you are as a business owner. Anyone who reads your company description should get a clear idea of what your bus', 'Active', '2021-03-11 19:04:01', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_footercontact`
 --
 
@@ -236,8 +281,8 @@ CREATE TABLE `tbl_logo` (
 --
 
 INSERT INTO `tbl_logo` (`id`, `uniqcode`, `image`, `name`, `status`, `create_date`, `update_date`) VALUES
-(2, 'FEuTht32SyeadnXkwz6f', 'cdded3ca0946772d519bb01ea6f1d8ba_thumb.png', 'Logo', 'Active', '2021-03-08 17:58:39', '2021-03-10 22:06:56'),
-(3, 'FhV5btxvMyLjIEoiGwO2', '3726fc32daf02286a94733cc69df7be2_thumb.png', 'Icons', 'Active', '2021-03-08 17:58:56', '2021-03-10 22:07:06');
+(2, 'FEuTht32SyeadnXkwz6f', 'cdded3ca0946772d519bb01ea6f1d8ba_thumb.png', 'Logo', 'Active', '2021-03-08 17:58:39', '2021-03-11 18:38:56'),
+(3, 'FhV5btxvMyLjIEoiGwO2', '3726fc32daf02286a94733cc69df7be2_thumb.png', 'Icons', 'Active', '2021-03-08 17:58:56', '2021-03-11 18:43:15');
 
 -- --------------------------------------------------------
 
@@ -284,6 +329,14 @@ CREATE TABLE `tbl_query` (
   `status` enum('Inactive','Active','Delete') NOT NULL,
   `image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_query`
+--
+
+INSERT INTO `tbl_query` (`id`, `uniqcode`, `name`, `email`, `moblie_no`, `website`, `massage`, `create_date`, `status`, `image`) VALUES
+(6, 'nGEpLlYzqIO8hcfZuaU1', 'defrtf', 'bcaprogramup@gmail.com', 'adsf', NULL, 'adfsdfg', '2021-03-11 20:39:42', 'Inactive', ''),
+(7, 'i8tPRXh6ZKrW9MxuOoCI', 'babu', 'bcaprogramup@gmail.com', '8436993268', NULL, 'njhgvcjhbg', '2021-03-11 20:44:10', 'Inactive', '');
 
 -- --------------------------------------------------------
 
@@ -338,9 +391,14 @@ CREATE TABLE `tbl_testimonials` (
 --
 
 INSERT INTO `tbl_testimonials` (`id`, `uniqcode`, `name`, `email`, `moblie_no`, `image`, `description`, `position`, `status`, `create_date`) VALUES
-(4, '3FvpLixVlZemMhEB9w1q', 'Soumen Mondal', 'soumen@gmail.com', '09564077104', 'testimonials.png', 'developer', 'developer', 'Active', '2021-03-09 13:57:02'),
-(5, 'trJVDgG9X0f28IkNRKbL', 'surojit', 'surojitsamui007gmail.com', '5478998745', 'testimonials.png', 'sadc', 'sadc', 'Active', '2021-03-09 22:01:12'),
-(6, '3uBwK4JWVkjcTsUqi7mZ', 'sad', 'asad@gmail.com', '7896541230', 'testimonials.png', 'sad', 'sad', 'Active', '2021-03-09 22:02:08');
+(4, '3FvpLixVlZemMhEB9w1q', 'Soumen Mondal', 'soumen@gmail.com', '09564077104', 'testimonials.png', 'developer', 'developer', 'Delete', '2021-03-09 13:57:02'),
+(5, 'trJVDgG9X0f28IkNRKbL', 'surojit', 'surojitsamui007gmail.com', '5478998745', 'testimonials.png', 'sadc', 'sadc', 'Delete', '2021-03-09 22:01:12'),
+(6, '3uBwK4JWVkjcTsUqi7mZ', 'sad', 'asad@gmail.com', '7896541230', 'testimonials.png', 'sad', 'sad', 'Delete', '2021-03-09 22:02:08'),
+(7, '91TXkdb7rZgKVsBDvE4Q', 'khjgc', 'khjgcf', '4512369871', 'testimonials.png', 'njbhvgcfx', 'njbhvgcfx', 'Delete', '2021-03-11 10:22:55'),
+(8, 'RCZu3tfOcLUnG0XQDmYi', 'akmskaSJ', 'ASDCF', '451236987', '', 'sadf', 'sadf', 'Delete', '2021-03-11 10:37:03'),
+(9, 'm16b5VRpP9d7Mv3hNEAc', 'aZXc', 'AZCXv', '4511236', '80e9fdfdeaf496a7fb81c389918d03c2_thumb.jpg', 'asdvxfbg', 'asdvxfbg', 'Delete', '2021-03-11 10:43:48'),
+(10, 'NPKwTEuZdvQ4HVGAYa3C', 'soumen dolui', 'soumendolui007@gmail.com', '452136987', '74b0c7b11bf1e5402ce67929588dc1a1_thumb.jpg', 'CEO', 'CEO', 'Delete', '2021-03-11 11:15:36'),
+(11, 'caY5nzT8PFlDyWRe6kI9', 'Dip Roy', 'diproy9876@gmail.com', '452136987', '466568fa2864c026ee5656e597989e36_thumb.jpg', 'Google\'s dictionary definition of testimonial is \"a formal statement testifying to someone\'s character and qualifications.\" These usually come from customers, colleagues, or peers who have benefitted from or experienced success as a result of the work you', 'C E O', 'Active', '2021-03-11 11:28:56');
 
 --
 -- Indexes for dumped tables
@@ -380,6 +438,12 @@ ALTER TABLE `tbl_blogs`
 -- Indexes for table `tbl_client`
 --
 ALTER TABLE `tbl_client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -438,7 +502,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_appointment`
 --
 ALTER TABLE `tbl_appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_banner`
@@ -457,6 +521,12 @@ ALTER TABLE `tbl_blogs`
 --
 ALTER TABLE `tbl_client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_footercontact`
@@ -480,7 +550,7 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `tbl_query`
 --
 ALTER TABLE `tbl_query`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_service`
@@ -492,7 +562,7 @@ ALTER TABLE `tbl_service`
 -- AUTO_INCREMENT for table `tbl_testimonials`
 --
 ALTER TABLE `tbl_testimonials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

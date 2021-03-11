@@ -125,7 +125,7 @@
         <!-- Search Modal End -->
 
 
-       
+        <script src="<?= base_url() ?>webroot/users/js/custom.js"></script>
          <!-- modernizr js -->
 		 <script src="<?= base_url() ?>webroot/users/js/modernizr-2.8.3.min.js"></script>
         <!-- jquery latest version -->

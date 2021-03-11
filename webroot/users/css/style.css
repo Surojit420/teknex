@@ -60,7 +60,7 @@ body {
   vertical-align: baseline;
   line-height: 26px;
   font-weight: 400;
-  overflow-x: hidden;
+  overflow-x: hidden; 
 }
 img {
   max-width: 100%;
@@ -1539,6 +1539,7 @@ blockquote cite:before {
 }
 .sec-title2 .sub-text {
   margin: 0 0 10px;
+  
   display: block;
   line-height: 28px;
   font-family: 'Livvic', sans-serif;
@@ -4103,6 +4104,8 @@ body .search-modal .close:hover {
 .rs-team .owl-stage-outer {
   padding: 10px;
   margin: -10px;
+  display:flex;
+  justify-content:center;
 }
 .rs-team.onepage-team {
   background: url(../images/bg/team-bg.png);

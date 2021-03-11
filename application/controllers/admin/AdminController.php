@@ -127,11 +127,11 @@ class AdminController extends CI_Controller
 
 		      );
 				$this->load->library('email', $config);				
-				$from='bongtech.solution@gmail.com';		
-				$from_name='Bongtech';
+				$from='surojitsamui007@gmail.com';		
+				$from_name='surojit';
 				$to_email=$email;
-				$subject='Bongtech : Reset password';
-				$message='<p>Dear '.$row->first_name.' '.$row->last_name.'</p><p> You have successfully changed your password. <br> Your new password is: '.$password.' </p><p>Warm Regards <br>Team Bongtech</p> <p><span style="color:red">This is an automated response. Please do not directly reply to this email.</span></p>';
+				$subject='NNIT';
+				$message='<p>Dear '.$row->first_name.' '.$row->last_name.'</p><p> You have successfully changed your password. <br> Your new password is: '.$password.' </p><p>Warm Regards <br>Team shsh</p> <p><span style="color:red">This is an automated response. Please do not directly reply to this email.</span></p>';
 				
 				email_send();
 				$this->email->from($from, $from_name);
@@ -209,7 +209,7 @@ class AdminController extends CI_Controller
 			}
 		}
 
-		$this->data['page_title']='Bongtech | Change Password';
+		$this->data['page_title']='Change Password';
 		$this->data['subview']='change_pass/index';
 		$this->load->view('admin/layout/default', $this->data);
 	}

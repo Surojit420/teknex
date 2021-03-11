@@ -42,6 +42,12 @@
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <span class="nav-text">Appointment</span>
                             </a>
+                        </li>
+                         <li>
+                            <a href="<?=base_url()?>admin/contact" class="ai-icon" aria-expanded="false">
+                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                <span class="nav-text">Contact</span>
+                            </a>
                         </li> 
                           <li>
                             <a href="<?=base_url()?>admin/testimonials" class="ai-icon" aria-expanded="false">

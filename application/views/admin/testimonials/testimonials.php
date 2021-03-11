@@ -33,7 +33,9 @@
                                         <td><?=$value->name?></td>
                                         <td><?=$value->email?></td>
                                         <td><?=$value->moblie_no?></td>
-                                        <td><?=$value->image?></td>
+                                        <td>
+                                            <img src="<?=base_url()?>webroot/admin/images/testimonials/<?=$value->image?>" class="showTableImage" id="product_img">
+                                        </td>
                                         <td><?=$value->position?></td>
                                         <td> <?php
                                         if(!empty($value->description))

@@ -18,6 +18,7 @@
                                         <th>Phone Number</th>
                                        <th>Message</th>
                                        <th>Date Time</th> 
+                                       <th>Action</th> 
                                     </tr>
                                 </thead>
                                 <tbody id="edit">

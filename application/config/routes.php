@@ -36,13 +36,19 @@ $route['admin/banner/banner_update'] = 'admin/setting/BannerController/update_da
 /*-----------------------Clients------------*/
 $route['admin/project'] = 'admin/client/ClientController';
 $route['admin/client_add'] = 'admin/client/ClientController/client_add';
-$route['admin/project/destroy'] = 'admin/client/ClientController/destroy';
+$route['admin/project/destroy'] = 'admin/client/ClientController/destroy';   //project
 $route['admin/project/status'] = 'admin/client/ClientController/status';
 $route['admin/project/edit'] = 'admin/client/ClientController/edit_data';
 $route['admin/project/client_update'] = 'admin/client/ClientController/update_data';
 
 
-
+/*-----------------------contact------------*/
+$route['admin/contact'] = 'admin/contact/ContactController';
+$route['admin/contact_add'] = 'admin/contact/ContactController/contact_add';
+$route['admin/contact/destroy'] = 'admin/contact/ContactController/destroy';
+$route['admin/contact/status'] = 'admin/contact/ContactController/status';
+$route['admin/contact/edit'] = 'admin/contact/ContactController/edit_data';
+$route['admin/contact/contact_update'] = 'admin/contact/ContactController/update_data';
 
 /*-----------------------Blogs------------*/
 $route['admin/blogs'] = 'admin/blogs/BlogsController';

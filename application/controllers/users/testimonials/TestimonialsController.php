@@ -34,16 +34,52 @@ class TestimonialsController extends CI_Controller
 		$name = $this->input->post('name');
 		$email = $this->input->post('email');
 		$phone = $this->input->post('phone');
-		$website = $this->input->post('subject');
-		$massage = $this->input->post('subject');
-		
+		$position = $this->input->post('subject');
+		$massage = $this->input->post('massage');
+		echo $massage;
+		$testimonials_upload_image = '';
+    	if(!empty($_FILES['image']['name']))
+		{
+			$config['upload_path']          = FCPATH.'/webroot/admin/images/uploadImage/';
+            $config['allowed_types']        = '*';
+            $config['encrypt_name'] 		= TRUE;
+            $config['max_size']             = '*';
+            $config['file_name']          	= $_FILES['image']['name'];
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('image'))
+        	{
+        		$image_data = $this->upload->data();
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = $image_data['full_path']; 
+                $config['create_thumb'] = TRUE;
+					$config['maintain_ratio'] = TRUE;
+					$config['new_image']    = FCPATH.'/webroot/admin/images/testimonials/'.$image_data['file_name'];
+                $config['width'] = 655;
+                $config['height'] = 468;
+                $this->load->library('image_lib', $config);
+        		$this->image_lib->clear();
+				$this->image_lib->initialize($config);
+				$testimonials_upload_image=$image_data['raw_name'].'_thumb'.$image_data['file_ext']; //a_thumb.jpg
+			    if (!$this->image_lib->resize())
+		     	{
+    				//$this->handle_error($this->image_lib->display_errors());
+					}
+				    $file = FCPATH.'/webroot/admin/images/uploadImage/'.$image_data['file_name'];
+				if (file_exists($file))
+				{
+					unlink($file);
+				}
+         	}
+		}
+        		//echo $testimonials_upload_image;
 		$data=array(
 		'uniqcode' => random_string('alnum',20),
 		'name' => $name,
 		'email' => $email,
 		'moblie_no' => $phone,
-		'image' => 'testimonials.png',
-		'position' => $website,
+		'image' => $testimonials_upload_image,
+		'position' => $position,
 		'description' => $massage,
 		'status' => "Inactive",
 		'create_date' => date('Y-m-d H:i:s'),
@@ -61,7 +97,7 @@ class TestimonialsController extends CI_Controller
 			redirect('testimonials');
 		}
 
-	}
+	 }
 	
 
 
